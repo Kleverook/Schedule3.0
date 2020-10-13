@@ -16,7 +16,10 @@ window.onload = function () {
                     let error = document.getElementById('error_box')
                     if (answer['state']) {
                         error.style.visibility = 'hidden'
+                        console.log("OK")
                         set_cookie('login_key', answer['loginKey'])
+
+                        window.location = "/"
                     } else {
                         error.style.visibility = 'visible'
                     }
