@@ -1,4 +1,4 @@
-package com.schedule.system;
+package com.schedule.system.oreluniver;
 
 import java.time.LocalDateTime;
 import java.util.Calendar;

@@ -1,4 +1,6 @@
-package com.schedule.system;
+package com.schedule.system.database;
+
+import com.schedule.system.oreluniver.DivisionList;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -51,6 +53,24 @@ public class DatabaseConnection {
         stmt.execute(sql);
         c.commit();
 
+    }
+    public List<DivisionList> getDivisionList() throws SQLException {
+        stmt = c.createStatement();
+        List<DivisionList> divisionLists = new ArrayList<>();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM list_division;");
+        while (rs.next()) {
+            DivisionList divisionList = new DivisionList();
+            divisionList.setIdDivision(rs.getInt("id"));
+            divisionList.setShortTitle(rs.getString("short_title"));
+            divisionList.setTitleDivision(rs.getString("title"));
+
+            divisionLists.add(divisionList);
+        }
+        rs.close();
+        stmt.close();
+        c.commit();
+
+        return divisionLists;
     }
 
     public List<AuthPerson> getAuthPerson() throws SQLException {
@@ -106,6 +126,17 @@ public class DatabaseConnection {
         if (j != -1) {
             return true;
         } else return false;
+    }
+    public AuthPerson findLoginKey(List<AuthPerson> personList, String login_key){
+        int j = -1;
+        for (int i = 0; i < personList.size(); i++) {
+            if (personList.get(i).login_key.equals(login_key)) {
+                j = i;
+            }
+        }
+        if (j != -1) {
+            return personList.get(j);
+        } else return null;
     }
 //    public
     //-------------- CREATE TABLE ---------------

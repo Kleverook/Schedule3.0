@@ -1,4 +1,8 @@
 window.onload = function () {
+    // if (get_cookie('login_key')!=null){
+    //     console.log(get_cookie("login_key"))
+    //     window.location = "/"
+    // }
     var check = false
     onlyLettersAndDigits = function (obj) {
         let re = new RegExp('^[a-zA-Z0-9]+$');

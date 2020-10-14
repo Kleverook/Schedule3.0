@@ -1,5 +1,8 @@
 window.onload = function () {
-
+    // if (get_cookie('login_key')!=null){
+    //     console.log(get_cookie("login_key"))
+    //     window.location = "/"
+    // }
 
     check_user = function () {
         let login = document.getElementById('login')

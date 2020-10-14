@@ -1,30 +1,31 @@
-com/schedule/system/AuthPerson.java
- com.schedule.system.AuthPerson
+com/schedule/system/database/DatabaseConnection.java
+ com.schedule.system.database.DatabaseConnection
+com/schedule/system/oreluniver/ScheduleConnectionStudent.java
+ com.schedule.system.oreluniver.GroupList
+ com.schedule.system.oreluniver.KurList
+ com.schedule.system.oreluniver.ScheduleConnectionStudent
+ com.schedule.system.oreluniver.ScheduleConnectionStudent$1
+ com.schedule.system.oreluniver.ScheduleConnectionStudent$2
+ com.schedule.system.oreluniver.ScheduleConnectionStudent$3
+ com.schedule.system.oreluniver.ScheduleConnectionStudent$4
+ com.schedule.system.oreluniver.ScheduleConnectionStudent$5
+ com.schedule.system.oreluniver.ScheduleList
+ com.schedule.system.oreluniver.TmpNumberWeak
+com/schedule/system/oreluniver/HTTPConnection.java
+ com.schedule.system.oreluniver.HTTPConnection
+com/schedule/system/database/AuthPerson.java
+ com.schedule.system.database.AuthPerson
+com/schedule/system/oreluniver/DivisionList.java
+ com.schedule.system.oreluniver.DivisionList
+com/schedule/web/ServingWebContentApplication.java
+ com.schedule.web.ServingWebContentApplication
+com/schedule/system/oreluniver/NumberWeak.java
+ com.schedule.system.oreluniver.NumberWeak
+com/schedule/web/HTMLController.java
+ com.schedule.web.HTMLController
+com/schedule/CalendarQuickstart.java
+ com.schedule.CalendarQuickstart
 com/schedule/web/RequestController.java
  com.schedule.web.RequestApi
  com.schedule.web.RequestController
  com.schedule.web.StateLogin
-com/schedule/web/HTMLController.java
- com.schedule.web.HTMLController
-com/schedule/system/NumberWeak.java
- com.schedule.system.NumberWeak
-com/schedule/system/DatabaseConnection.java
- com.schedule.system.DatabaseConnection
-com/schedule/system/HTTPConnection.java
- com.schedule.system.HTTPConnection
-com/schedule/system/ScheduleConnectionStudent.java
- com.schedule.system.DivisionList
- com.schedule.system.GroupList
- com.schedule.system.KurList
- com.schedule.system.ScheduleConnectionStudent
- com.schedule.system.ScheduleConnectionStudent$1
- com.schedule.system.ScheduleConnectionStudent$2
- com.schedule.system.ScheduleConnectionStudent$3
- com.schedule.system.ScheduleConnectionStudent$4
- com.schedule.system.ScheduleConnectionStudent$5
- com.schedule.system.ScheduleList
- com.schedule.system.TmpNumberWeak
-com/schedule/CalendarQuickstart.java
- com.schedule.CalendarQuickstart
-com/schedule/web/ServingWebContentApplication.java
- com.schedule.web.ServingWebContentApplication

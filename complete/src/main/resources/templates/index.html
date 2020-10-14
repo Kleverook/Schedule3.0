@@ -1,12 +1,43 @@
 <!DOCTYPE HTML>
-<html>
-<head> 
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
     <title></title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <script src="scripts.js"></script>
     <script src="index/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="index/style.css">
 </head>
 <body>
-    <p>Get your greeting <a href="/greeting">here</a></p>
+<p th:text="${name} +' '+ ${surname}"/>
+<input type="button" id="exit" value="Exit" onclick="delete_cookie('login_key')">
+
+
+
+
+<input type="button" id="myBtn" value="Добавить групу" onclick="get_division()">
+
+
+
+<div id="myModal" class="modal">
+
+
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <h1>Добавление группы</h1>
+        </div>
+        <div id="modal" class="modal-body">
+
+        </div>
+        <div class="modal-footer">
+
+        </div>
+    </div>
+
+</div>
+
+
+
+</div>
 </body>
 </html>

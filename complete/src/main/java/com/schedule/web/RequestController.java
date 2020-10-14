@@ -1,16 +1,14 @@
 package com.schedule.web;
 
 
-import com.schedule.system.AuthPerson;
-import com.schedule.system.DatabaseConnection;
+import com.schedule.system.database.AuthPerson;
+import com.schedule.system.database.DatabaseConnection;
 import com.google.gson.Gson;
-import org.springframework.ui.Model;
+import com.schedule.system.oreluniver.DivisionList;
+import com.schedule.system.oreluniver.ScheduleConnectionStudent;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
 
 class StateLogin {
@@ -63,7 +61,8 @@ public class RequestController {
 
     @RequestMapping("/api")
     @ResponseBody
-    public String API(@RequestBody String request) throws SQLException {
+
+    public String API(@RequestBody String request) throws Exception {
 
         Gson gson = new Gson();
         RequestApi json = new Gson().fromJson(request, RequestApi.class);
@@ -128,7 +127,18 @@ public class RequestController {
                 return gson.toJson(new StateLogin(false, "Имя пользователя уже существует!"));
             }
 
-        } else {
+
+        } else if (json.api_method.equals("get_division")){
+            System.out.println("OK");
+            DatabaseConnection dataBase = new DatabaseConnection();
+            dataBase.connectionDB();
+            List<DivisionList> divisionLists = new ScheduleConnectionStudent().getDivisionList();
+            System.out.println(divisionLists);
+            dataBase.setDivisionList(divisionLists);
+
+            return gson.toJson(divisionLists);
+        }
+        else {
             return gson.toJson(new StateLogin());
         }
     }

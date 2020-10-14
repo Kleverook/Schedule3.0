@@ -1,4 +1,4 @@
-package com.schedule.system;
+package com.schedule.system.oreluniver;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -7,26 +7,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import java.lang.reflect.Type;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
-class DivisionList {
-    private String titleDivision, shortTitle;
-    private int idDivision;
-
-    public String getTitleDivision(){return titleDivision;}
-
-    public int getId() {
-        return this.idDivision;
-    }
-
-    public String getShortTitle() {
-        return this.shortTitle;
-    }
-}
 class TmpNumberWeak{
     private int computed;
 

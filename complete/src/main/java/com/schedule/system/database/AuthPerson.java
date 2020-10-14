@@ -1,4 +1,4 @@
-package com.schedule.system;
+package com.schedule.system.database;
 
 public class AuthPerson {
     int id, id_role;
