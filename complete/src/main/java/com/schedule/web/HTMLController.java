@@ -67,8 +67,11 @@ public class HTMLController {
             @RequestParam(name="id", required=false, defaultValue="") String id,
             @RequestParam(name="code", required=false, defaultValue="") String code) throws SQLException, IOException, GeneralSecurityException {
 
-        CalendarAPI calendarAPI = new CalendarAPI("http://127.0.0.1:8080");
+        System.out.println(id);
+        System.out.println(code);
+        CalendarAPI calendarAPI = new CalendarAPI("http://127.0.0.1:8080/google_auth?id="+id);
         calendarAPI.createService(code);
+        String token = calendarAPI.getAccessToken();
         calendarAPI.createEvent(
                 "Разработка платформенных и кросплатформенных киберфизических систем",
                 "Наугорское ш., 29, Орёл, Орловская обл., 302020",

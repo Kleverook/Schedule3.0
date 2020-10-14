@@ -23,9 +23,9 @@ com/schedule/web/RequestController.java
  com.schedule.web.StateLogin
 com/schedule/system/oreluniver/NumberWeak.java
  com.schedule.system.oreluniver.NumberWeak
-com/schedule/web/HTMLController.java
- com.schedule.web.HTMLController
-com/schedule/CalendarQuickstart.java
- com.schedule.CalendarQuickstart
 com/schedule/web/ServingWebContentApplication.java
  com.schedule.web.ServingWebContentApplication
+com/schedule/system/google/CalendarAPI.java
+ com.schedule.system.google.CalendarAPI
+com/schedule/web/HTMLController.java
+ com.schedule.web.HTMLController
