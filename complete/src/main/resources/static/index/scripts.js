@@ -4,6 +4,19 @@ window.onload = function () {
         console.log(get_cookie("login_key"))
         window.location = "/login"
     }
+    first = function () {
+        document.getElementById("second_hide").setAttribute("style", "opacity:1; transition: 1s; height: 100%;");
+        document.getElementById("first").setAttribute("style", "display: none");
+        document.getElementById("first_yelloy").setAttribute("style", "display: block");
+
+    }
+
+    first_yelloy = function () {
+        document.getElementById("second_hide").setAttribute("style", "display: none");
+        document.getElementById("first_yelloy").setAttribute("style", "display: none");
+        document.getElementById("first").setAttribute("style", "display: block");
+
+    }
 
     function createDiv(className, value, id) {
         var input = document.createElement('input')
@@ -14,13 +27,18 @@ window.onload = function () {
         input.style.backgroundColor = 'blue'
         input.value = value
         input.id = id
+        input.onclick = function () {
+            console.log(this.id)
+        }
         return input;
     }
 
+    get_kurs = function (id) {
 
+    }
     get_division = function () {
         console.log("get_division")
-        let modal_body = document.getElementById('modal')
+        let modal_body = document.getElementById('division_body')
         let xmlhttp = getXmlHttp()
         xmlhttp.open('POST', '/api', true)
         xmlhttp.setRequestHeader('Content-Type', 'application/json')

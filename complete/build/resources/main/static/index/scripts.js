@@ -14,13 +14,18 @@ window.onload = function () {
         input.style.backgroundColor = 'blue'
         input.value = value
         input.id = id
+        input.onclick = function (){
+            console.log(this.id)
+        }
         return input;
     }
 
+    get_kurs = function (id){
 
+    }
     get_division = function () {
         console.log("get_division")
-        let modal_body = document.getElementById('modal')
+        let modal_body = document.getElementById('division_body')
         let xmlhttp = getXmlHttp()
         xmlhttp.open('POST', '/api', true)
         xmlhttp.setRequestHeader('Content-Type', 'application/json')

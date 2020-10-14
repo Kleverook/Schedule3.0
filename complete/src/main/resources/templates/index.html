@@ -12,10 +12,7 @@
 <input type="button" id="exit" value="Exit" onclick="delete_cookie('login_key')">
 
 
-
-
 <input type="button" id="myBtn" value="Добавить групу" onclick="get_division()">
-
 
 
 <div id="myModal" class="modal">
@@ -27,15 +24,73 @@
             <h1>Добавление группы</h1>
         </div>
         <div id="modal" class="modal-body">
+            <div>
 
-        </div>
-        <div class="modal-footer">
+                <p id="first" onclick="first()">Показать блок</p>
 
+                <p id="first_yelloy" style="display:none" onclick="first_yelloy()">Скрыть блок </p>
+
+                <div id="second_hide" style="display:none">
+
+                    здесь дргой блок с текстом...
+
+                </div>
+
+            </div>
+
+
+            <div class="panel-group" id="accordionStud">
+                <div id="divisionStuds" class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordionStud" href="#collapseDivStud">
+                                Факультет/институт
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseDivStud" class="panel-collapse collapse in">
+                        <div id="division_body" class="panel-body">
+
+                        </div>
+                    </div>
+                    <div id="kurs" class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" class="collapsed" data-parent="#accordionStud"
+                                   href="#collapseKurs">
+                                    Курс
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseKurs" class="panel-collapse collapse">
+                            <div class="panel-body">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div id="group" class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" class="collapsed" data-parent="#accordionStud"
+                                   href="#collapseGroup">
+                                    Группа
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseGroup" class="panel-collapse collapse">
+                            <div class="panel-body">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+            </div>
         </div>
+
     </div>
-
-</div>
-
 
 
 </div>
