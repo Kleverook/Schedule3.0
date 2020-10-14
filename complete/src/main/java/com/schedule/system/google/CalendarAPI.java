@@ -47,14 +47,14 @@ public class CalendarAPI {
 
     public CalendarAPI(String redirectURL) throws IOException, GeneralSecurityException {
         HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-        clientSecret = getClientSecretFromFile("/credentials.json");
+        clientSecret = getClientSecretFromFile("/system/credentials.json");
         flow = getFlow(clientSecret);
         REDIRECT_URL = redirectURL;
     }
 
     public CalendarAPI() throws IOException, GeneralSecurityException {
         HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-        clientSecret = getClientSecretFromFile("/credentials.json");
+        clientSecret = getClientSecretFromFile("/system/credentials.json");
         flow = getFlow(clientSecret);
         REDIRECT_URL = "http://127.0.0.1:8080";
     }
@@ -130,7 +130,7 @@ public class CalendarAPI {
     }
 
     public static void main(String... args) throws IOException, GeneralSecurityException {
-        CalendarAPI test = new CalendarAPI("/credentials.json", "http://127.0.0.1:8000");
+        CalendarAPI test = new CalendarAPI("/system/credentials.json", "http://127.0.0.1:8000");
         System.out.println(test.getAuthUrl());
 
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
