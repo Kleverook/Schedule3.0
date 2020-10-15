@@ -1,8 +1,6 @@
 com/schedule/system/database/DatabaseConnection.java
  com.schedule.system.database.DatabaseConnection
 com/schedule/system/oreluniver/ScheduleConnectionStudent.java
- com.schedule.system.oreluniver.GroupList
- com.schedule.system.oreluniver.KurList
  com.schedule.system.oreluniver.ScheduleConnectionStudent
  com.schedule.system.oreluniver.ScheduleConnectionStudent$1
  com.schedule.system.oreluniver.ScheduleConnectionStudent$2
@@ -23,9 +21,13 @@ com/schedule/web/RequestController.java
  com.schedule.web.StateLogin
 com/schedule/system/oreluniver/NumberWeak.java
  com.schedule.system.oreluniver.NumberWeak
-com/schedule/web/ServingWebContentApplication.java
- com.schedule.web.ServingWebContentApplication
-com/schedule/system/google/CalendarAPI.java
- com.schedule.system.google.CalendarAPI
 com/schedule/web/HTMLController.java
  com.schedule.web.HTMLController
+com/schedule/system/oreluniver/GroupList.java
+ com.schedule.system.oreluniver.GroupList
+com/schedule/system/google/CalendarAPI.java
+ com.schedule.system.google.CalendarAPI
+com/schedule/system/oreluniver/KurList.java
+ com.schedule.system.oreluniver.KurList
+com/schedule/web/ServingWebContentApplication.java
+ com.schedule.web.ServingWebContentApplication

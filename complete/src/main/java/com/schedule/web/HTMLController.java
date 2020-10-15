@@ -18,10 +18,11 @@ import java.util.List;
 public class HTMLController {
 
     @GetMapping("/greeting")
-    public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
+    public String greeting(@RequestParam(name = "name", required = false, defaultValue = "World") String name, Model model) {
         model.addAttribute("name", name);
         return "greeting";
     }
+
     @GetMapping("/login")
     public String login(@CookieValue(value = "login_key", defaultValue = "") String login_key) throws SQLException {
         DatabaseConnection dataBase = new DatabaseConnection();
@@ -29,11 +30,13 @@ public class HTMLController {
         List<AuthPerson> person = dataBase.getAuthPerson();
         AuthPerson user = dataBase.findLoginKey(person, login_key);
 
-        if (user!=null){
-            return "redirect:/";}
-
-        else {return "login";}
+        if (user != null) {
+            return "redirect:/";
+        } else {
+            return "login";
+        }
     }
+
     @GetMapping("/register")
     public String register(@CookieValue(value = "login_key", defaultValue = "") String login_key) throws SQLException {
 
@@ -41,10 +44,13 @@ public class HTMLController {
         dataBase.connectionDB();
         List<AuthPerson> person = dataBase.getAuthPerson();
         AuthPerson user = dataBase.findLoginKey(person, login_key);
-        if (user!=null){return "redirect:/";}
-
-        else {return "register";}
+        if (user != null) {
+            return "redirect:/";
+        } else {
+            return "register";
+        }
     }
+
     @GetMapping("/")
     public String index(
             @CookieValue(value = "login_key", defaultValue = "") String login_key,
@@ -53,32 +59,40 @@ public class HTMLController {
         dataBase.connectionDB();
         List<AuthPerson> person = dataBase.getAuthPerson();
         AuthPerson user = dataBase.findLoginKey(person, login_key);
-        if (user!=null){
-            CalendarAPI calendarAPI = new CalendarAPI("http://127.0.0.1:8080/google_auth?id="+user.getId());
+        if (user != null) {
+            CalendarAPI calendarAPI = new CalendarAPI("http://127.0.0.1:8080/google_auth?id=" + user.getId());
             model.addAttribute("name", user.getName());
             model.addAttribute("surname", user.getSurname());
             model.addAttribute("auth_url", calendarAPI.getAuthUrl());
-            return "index";}
-
-        else {return "login";}
+            return "index";
+        } else {
+            return "login";
+        }
     }
+
     @GetMapping("/google_auth")
     public String google_auth(
-            @RequestParam(name="id", required=false, defaultValue="") String id,
-            @RequestParam(name="code", required=false, defaultValue="") String code) throws SQLException, IOException, GeneralSecurityException {
+            @CookieValue(value = "login_key", defaultValue = "") String login_key,
+            @RequestParam(name = "id", required = false, defaultValue = "") String id,
+            @RequestParam(name = "code", required = false, defaultValue = "") String code) throws SQLException, IOException, GeneralSecurityException {
 
         System.out.println(id);
         System.out.println(code);
-        CalendarAPI calendarAPI = new CalendarAPI("http://127.0.0.1:8080/google_auth?id="+id);
+        CalendarAPI calendarAPI = new CalendarAPI("http://127.0.0.1:8080/google_auth?id=" + id);
         calendarAPI.createService(code);
         String token = calendarAPI.getAccessToken();
-        calendarAPI.createEvent(
-                "Разработка платформенных и кросплатформенных киберфизических систем",
-                "Наугорское ш., 29, Орёл, Орловская обл., 302020",
-                "Кибернетические и киберфизические системы (лаб)\\nКорпус 11, аудитория 227\\nВетров А.С. http://oreluniver.ru/employee/7251\\n(создано при промощи приложения)",
-                new DateTime("2020-10-14T15:30:00-00:00"),
-                new DateTime("2020-10-14T17:10:00-00:00")
-        );
+
+        DatabaseConnection dataBase = new DatabaseConnection();
+        dataBase.connectionDB();
+
+        dataBase.setGoogleCalendarKey(login_key, token);
+//        calendarAPI.createEvent(
+//                "Разработка платформенных и кросплатформенных киберфизических систем",
+//                "Наугорское ш., 29, Орёл, Орловская обл., 302020",
+//                "Кибернетические и киберфизические системы (лаб)\\nКорпус 11, аудитория 227\\nВетров А.С. http://oreluniver.ru/employee/7251\\n(создано при промощи приложения)",
+//                new DateTime("2020-10-14T15:30:00-00:00"),
+//                new DateTime("2020-10-14T17:10:00-00:00")
+//        );
         return "redirect:/";
     }
 

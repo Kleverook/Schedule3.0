@@ -5,6 +5,8 @@ import com.schedule.system.database.AuthPerson;
 import com.schedule.system.database.DatabaseConnection;
 import com.google.gson.Gson;
 import com.schedule.system.oreluniver.DivisionList;
+import com.schedule.system.oreluniver.GroupList;
+import com.schedule.system.oreluniver.KurList;
 import com.schedule.system.oreluniver.ScheduleConnectionStudent;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,6 +35,7 @@ class StateLogin {
 
 class RequestApi {
     String password = "", login = "", login_key = "", name = "", surname = "", api_method;
+    int idDiv, idgruop, kurNum;
 }
 
 @RestController
@@ -85,7 +88,8 @@ public class RequestController {
 
                 return gson.toJson(new StateLogin(false, ""));
             }
-        } else if (json.api_method.equals("check_login")) {
+        }
+        else if (json.api_method.equals("check_login")) {
             System.out.println(json.login);
 
 
@@ -102,7 +106,8 @@ public class RequestController {
                 return gson.toJson(new StateLogin(false));
             }
 
-        } else if (json.api_method.equals("select_database")) {
+        }
+        else if (json.api_method.equals("select_database")) {
             DatabaseConnection dataBase = new DatabaseConnection();
             dataBase.connectionDB();
             List<AuthPerson> person = dataBase.getAuthPerson();
@@ -128,7 +133,8 @@ public class RequestController {
             }
 
 
-        } else if (json.api_method.equals("get_division")){
+        }
+        else if (json.api_method.equals("get_division")){
             System.out.println("OK");
             DatabaseConnection dataBase = new DatabaseConnection();
             dataBase.connectionDB();
@@ -137,6 +143,37 @@ public class RequestController {
             dataBase.setDivisionList(divisionLists);
 
             return gson.toJson(divisionLists);
+        }
+        else if (json.api_method.equals("get_kurs")){
+            List<KurList> kurLists = new ScheduleConnectionStudent().getKurList(json.idDiv);
+            System.out.println(kurLists);
+            return gson.toJson(kurLists);
+        }
+        else if (json.api_method.equals("get_group")){
+            System.out.println(json.kurNum);
+            List<GroupList> groupLists = new ScheduleConnectionStudent().getGroupList(json.idDiv, json.kurNum);
+            DatabaseConnection dataBase = new DatabaseConnection();
+            dataBase.connectionDB();
+            dataBase.setGroupList(groupLists, json.idDiv, json.kurNum);
+
+            return gson.toJson(groupLists);
+        }
+        else if (json.api_method.equals("return_group")){
+            DatabaseConnection dataBase = new DatabaseConnection();
+            dataBase.connectionDB();
+            List<AuthPerson> person = dataBase.getAuthPerson();
+            AuthPerson user = dataBase.findLoginKey(person, json.login_key);
+            dataBase.setListPersonGroup(user.getId(), json.idgruop);
+            return gson.toJson(new StateLogin(true));
+        }
+        else if (json.api_method.equals("show_group")){
+            DatabaseConnection dataBase = new DatabaseConnection();
+            dataBase.connectionDB();
+            List<AuthPerson> person = dataBase.getAuthPerson();
+            AuthPerson user = dataBase.findLoginKey(person, json.login_key);
+            List<GroupList> groupLists = dataBase.getGroupList(user.getId());
+            System.out.println(groupLists);
+            return gson.toJson(groupLists);
         }
         else {
             return gson.toJson(new StateLogin());

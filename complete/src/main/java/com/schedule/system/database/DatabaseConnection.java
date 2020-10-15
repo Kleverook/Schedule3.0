@@ -1,6 +1,7 @@
 package com.schedule.system.database;
 
 import com.schedule.system.oreluniver.DivisionList;
+import com.schedule.system.oreluniver.GroupList;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.List;
 
 public class DatabaseConnection {
     //  Database credentials
-    static final String DB_URL = "jdbc:postgresql://192.168.43.131:5432/postgres";
+    static final String DB_URL = "jdbc:postgresql://0.0.0.0:5432/postgres";
     static final String USER = "postgres";
     static final String PASS = "0000";
     Connection c;
@@ -37,7 +38,7 @@ public class DatabaseConnection {
         sql += String.format("('%s', '%s', '%s', '%s', %s); ", personList.getLogin(), personList.getPassword(), personList.getName(), personList.getSurname(), 2);
 
 //        sql = sql.substring(0, sql.length() - 2) + " ON CONFLICT (id) DO UPDATE SET title = EXCLUDED.title, SHORT_TITLE = EXCLUDED.SHORT_TITLE;";
-       System.out.println(sql);
+        System.out.println(sql);
         stmt.execute(sql);
         c.commit();
     }
@@ -54,6 +55,35 @@ public class DatabaseConnection {
         c.commit();
 
     }
+
+    public void setGroupList(List<GroupList> groupList, int idDiv, int kurNum) throws SQLException {
+        stmt = c.createStatement();
+
+        sql = "INSERT INTO list_group (id, course, title, code, level_education, id_division) VALUES ";
+        for (int i = 0; i < groupList.size(); i++) {
+            sql += String.format("(%s, %s, '%s', '%s', '%s', %s), ", groupList.get(i).getIdgruop(), kurNum, groupList.get(i).getTitle(), groupList.get(i).getCodedirection(), groupList.get(i).getLevelEducation(), idDiv);
+        }
+        sql = sql.substring(0, sql.length() - 2) + " ON CONFLICT (id) DO UPDATE SET title = EXCLUDED.title, course = EXCLUDED.course, code = EXCLUDED.code, level_education = EXCLUDED.level_education, id_division = EXCLUDED.id_division;";
+        System.out.println(sql);
+        stmt.execute(sql);
+        c.commit();
+
+    }
+
+    public void setListPersonGroup(int id_person, int id_group) throws SQLException {
+        stmt = c.createStatement();
+
+        sql = "SELECT count(id)" +
+                "FROM list_person_group where id_person = 5 and id_group = 7513;\n";
+
+        sql = "INSERT INTO list_person_group (id_person,id_group) VALUES ";
+        sql += String.format("(%s, %s); ", id_person, id_group);
+//        sql = sql.substring(0, sql.length() - 2) + " ON CONFLICT (id_group) DO UPDATE SET id_person = EXCLUDED.id_person;";
+
+        stmt.execute(sql);
+        c.commit();
+    }
+
     public List<DivisionList> getDivisionList() throws SQLException {
         stmt = c.createStatement();
         List<DivisionList> divisionLists = new ArrayList<>();
@@ -71,6 +101,34 @@ public class DatabaseConnection {
         c.commit();
 
         return divisionLists;
+    }
+
+    public List<GroupList> getGroupList( int id) throws SQLException {
+
+
+        List<GroupList> listGroup = new ArrayList<>();
+
+        stmt = c.createStatement();
+        ResultSet rs = stmt.executeQuery("select(select (select short_title from list_division where id = id_division) FROM public.list_group where id = id_group),\n" +
+                "(select course from list_group where id = id_group)," +
+                "(select title from list_group where id = id_group)," +
+                "(select code from list_group where id = id_group), " +
+                "(select level_education from list_group where id = id_group) " +
+                "from list_person_group where id_person ="+id+";");
+        while (rs.next()) {
+            GroupList group = new GroupList();
+            group.setCourse(rs.getInt("course"));
+            group.setTitle(rs.getString("title"));
+            group.setCodedirection(rs.getString("code"));
+            group.setLevelEducation(rs.getString("level_education"));
+            group.setShort_title(rs.getString("short_title"));
+
+            listGroup.add(group);
+        }
+        rs.close();
+        stmt.close();
+        c.commit();
+        return listGroup;
     }
 
     public List<AuthPerson> getAuthPerson() throws SQLException {
@@ -100,6 +158,14 @@ public class DatabaseConnection {
         return listPerson;
     }
 
+    public void setGoogleCalendarKey(String login_key, String token) throws SQLException {
+        stmt = c.createStatement();
+        sql = "UPDATE auth_person set google_calendar_key=" + "'" + token + "'" + "where login_key=" + "'" + login_key + "'" + ";";
+        stmt.executeUpdate(sql);
+        c.commit();
+        stmt.close();
+    }
+
     public AuthPerson findPerson(List<AuthPerson> personList, String login, String password) {
         int j = -1;
         for (int i = 0; i < personList.size(); i++) {
@@ -127,7 +193,8 @@ public class DatabaseConnection {
             return true;
         } else return false;
     }
-    public AuthPerson findLoginKey(List<AuthPerson> personList, String login_key){
+
+    public AuthPerson findLoginKey(List<AuthPerson> personList, String login_key) {
         int j = -1;
         for (int i = 0; i < personList.size(); i++) {
             if (personList.get(i).login_key.equals(login_key)) {

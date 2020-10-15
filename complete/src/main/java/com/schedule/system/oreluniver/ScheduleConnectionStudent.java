@@ -17,14 +17,6 @@ class TmpNumberWeak{
 
 }
 
-class KurList {
-    private int kurs;
-
-    public int getKurs() {
-        return this.kurs;
-    }
-}
-
 class ScheduleList {
     String TitleSubject, TypeLesson, DateLesson, Korpus,
             NumberRoom, special, title, Family, Name, SecondName,
@@ -61,18 +53,6 @@ class ScheduleList {
 
 }
 
-class GroupList {
-    private String title, Codedirection, levelEducation;
-    private int idgruop;
-
-    public int getIdgruop() {
-        return this.idgruop;
-    }
-
-    public String getTitle() {
-        return this.title;
-    }
-}
 public class ScheduleConnectionStudent {
     HTTPConnection http = new HTTPConnection();
 
