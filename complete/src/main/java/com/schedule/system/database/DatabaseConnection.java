@@ -74,14 +74,24 @@ public class DatabaseConnection {
         stmt = c.createStatement();
 
         sql = "SELECT count(id)" +
-                "FROM list_person_group where id_person = 5 and id_group = 7513;\n";
+                "FROM list_person_group where id_person ="+id_person+" and id_group = "+id_group+";";
+        ResultSet rs = stmt.executeQuery(sql);
+        int count = 0;
+        while (rs.next()) {
+            count = rs.getInt("count");
+        }
+        System.out.println(count);
 
-        sql = "INSERT INTO list_person_group (id_person,id_group) VALUES ";
-        sql += String.format("(%s, %s); ", id_person, id_group);
-//        sql = sql.substring(0, sql.length() - 2) + " ON CONFLICT (id_group) DO UPDATE SET id_person = EXCLUDED.id_person;";
-
-        stmt.execute(sql);
         c.commit();
+        if (count==0) {
+
+            sql = "INSERT INTO list_person_group (id_person,id_group) VALUES ";
+            sql += String.format("(%s, %s); ", id_person, id_group);
+//        sql = sql.substring(0, sql.length() - 2) + " ON CONFLICT (id_group) DO UPDATE SET id_person = EXCLUDED.id_person;";
+System.out.println("sql");
+            stmt.execute(sql);
+            c.commit();
+        }
     }
 
     public List<DivisionList> getDivisionList() throws SQLException {
@@ -104,17 +114,15 @@ public class DatabaseConnection {
     }
 
     public List<GroupList> getGroupList( int id) throws SQLException {
-
-
         List<GroupList> listGroup = new ArrayList<>();
 
         stmt = c.createStatement();
-        ResultSet rs = stmt.executeQuery("select(select (select short_title from list_division where id = id_division) FROM public.list_group where id = id_group),\n" +
-                "(select course from list_group where id = id_group)," +
-                "(select title from list_group where id = id_group)," +
-                "(select code from list_group where id = id_group), " +
-                "(select level_education from list_group where id = id_group) " +
-                "from list_person_group where id_person ="+id+";");
+        ResultSet rs = stmt.executeQuery(
+                "select s.course, s.title, s.code, s.level_education, d.short_title " +
+                "from list_person_group as a, list_group as s, list_division as d " +
+                "where s.id = a.id_group and d.id = s.id_division and a.id_person = "+id +
+                " order by a.id");
+
         while (rs.next()) {
             GroupList group = new GroupList();
             group.setCourse(rs.getInt("course"));

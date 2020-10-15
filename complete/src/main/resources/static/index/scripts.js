@@ -127,7 +127,6 @@ window.onload = function () {
 
     return_group = function (id) {
 
-
         let xmlhttp = getXmlHttp()
         xmlhttp.open('POST', '/api', true)
         xmlhttp.setRequestHeader('Content-Type', 'application/json')
@@ -141,9 +140,6 @@ window.onload = function () {
             if (xmlhttp.readyState == 4) {
                 if (xmlhttp.status == 200) {
                     let answer = JSON.parse(xmlhttp.responseText)
-                    if (answer) {
-
-                    }
                 }
             }
         }
@@ -216,6 +212,7 @@ window.onload = function () {
         }
     }
     show_group = function () {
+
         console.log("show_group")
         let modal_body = document.getElementById('list_group')
         modal_body.innerHTML = '';
@@ -239,7 +236,6 @@ window.onload = function () {
                             tr.appendChild(createTD('group_out')).appendChild(createP('group_P', answer[i]["title"]));
                             tr.appendChild(createTD('group_out')).appendChild(createP('group_P', answer[i]["Codedirection"]));
                             tr.appendChild(createTD('group_out')).appendChild(createP('group_P', answer[i]["levelEducation"]));
-
 
                         }
                     }

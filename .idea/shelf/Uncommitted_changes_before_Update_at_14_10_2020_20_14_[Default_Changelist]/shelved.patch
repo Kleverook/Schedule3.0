@@ -1,0 +1,692 @@
+Index: complete/src/main/resources/static/index/style.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\r\n\r\nbody {font-family: Arial, Helvetica, sans-serif;}\r\n\r\n#myBtn {\r\n    background-color: #4160fc;\r\n    color: white;\r\n    padding: 12px 16px;\r\n    font-size: 18px;\r\n    font-weight: bold;\r\n    border: none;\r\n    cursor: pointer;\r\n    width: 180px;\r\n}\r\n\r\n.division{\r\n    color: white;\r\n    font-size: 18px;\r\n}\r\n.modal {\r\n    display: none; /* Hidden by default */\r\n    position: fixed; /* Stay in place */\r\n    z-index: 1; /* Sit on top */\r\n    padding-top: 100px; /* Location of the box */\r\n    left: 0;\r\n    top: 0;\r\n    width: 100%; /* Full width */\r\n    height: 100%; /* Full height */\r\n    overflow: auto; /* Enable scroll if needed */\r\n    background-color: rgb(0,0,0); /* Fallback color */\r\n    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */\r\n}\r\n\r\n\r\n.modal-content {\r\n    position: relative;\r\n    background-color: #bed0e7;\r\n    margin: auto;\r\n    padding: 0;\r\n    border: 5px solid #4170ff;\r\n    width: 50%;\r\n    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);\r\n    -webkit-animation-name: animatetop;\r\n    -webkit-animation-duration: 0.4s;\r\n    animation-name: animatetop;\r\n    animation-duration: 0.4s\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- complete/src/main/resources/static/index/style.css	(revision 90b227a8e4dda066695a0dc7d8e30aac68e5bbd4)
++++ complete/src/main/resources/static/index/style.css	(date 1602694771200)
+@@ -1,6 +1,7 @@
+ 
+-
+-body {font-family: Arial, Helvetica, sans-serif;}
++body {
++    font-family: Arial, Helvetica, sans-serif;
++}
+ 
+ #myBtn {
+     background-color: #4160fc;
+@@ -13,10 +14,11 @@
+     width: 180px;
+ }
+ 
+-.division{
++.division {
+     color: white;
+     font-size: 18px;
+ }
++
+ .modal {
+     display: none; /* Hidden by default */
+     position: fixed; /* Stay in place */
+@@ -27,8 +29,8 @@
+     width: 100%; /* Full width */
+     height: 100%; /* Full height */
+     overflow: auto; /* Enable scroll if needed */
+-    background-color: rgb(0,0,0); /* Fallback color */
+-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
++    background-color: rgb(0, 0, 0); /* Fallback color */
++    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+ }
+ 
+ 
+@@ -39,9 +41,32 @@
+     padding: 0;
+     border: 5px solid #4170ff;
+     width: 50%;
+-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
++    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+     -webkit-animation-name: animatetop;
+     -webkit-animation-duration: 0.4s;
+     animation-name: animatetop;
+     animation-duration: 0.4s
+-}
+\ No newline at end of file
++}
++
++
++p#first {
++    cursor: pointer;
++    font-family: cursive;
++    line-height: 13px;
++    text-indent: 22px;
++    line-height: 33px;
++    border: 1px solid #d2d2d2;
++    font-size: 18px;
++
++}
++
++p#first_yelloy {
++    cursor: pointer;
++    background: #144498;
++    font-size: 18px;
++    color: white;
++    text-indent: 22px;
++    line-height: 33px;
++    border: 1PX SOLID #144498;
++
++}
+Index: complete/src/main/resources/static/index/scripts.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>window.onload = function () {\r\n    console.log(get_cookie(\"login_key\"))\r\n    if (get_cookie('login_key') == null) {\r\n        console.log(get_cookie(\"login_key\"))\r\n        window.location = \"/login\"\r\n    }\r\n    first = function () {\r\n        document.getElementById(\"second_hide\").setAttribute(\"style\", \"opacity:1; transition: 1s; height: 100%;\");\r\n        document.getElementById(\"first\").setAttribute(\"style\", \"display: none\");\r\n        document.getElementById(\"first_yelloy\").setAttribute(\"style\", \"display: block\");\r\n\r\n    }\r\n\r\n    first_yelloy = function () {\r\n        document.getElementById(\"second_hide\").setAttribute(\"style\", \"display: none\");\r\n        document.getElementById(\"first_yelloy\").setAttribute(\"style\", \"display: none\");\r\n        document.getElementById(\"first\").setAttribute(\"style\", \"display: block\");\r\n\r\n    }\r\n\r\n    function createDiv(className, value, id) {\r\n        var input = document.createElement('input')\r\n        input.type = 'button'\r\n        input.className = className\r\n        input.style.width = '100px'\r\n        input.style.height = '50px'\r\n        input.style.backgroundColor = 'blue'\r\n        input.value = value\r\n        input.id = id\r\n        input.onclick = function () {\r\n            console.log(this.id)\r\n        }\r\n        return input;\r\n    }\r\n\r\n    get_kurs = function (id) {\r\n\r\n    }\r\n    get_division = function () {\r\n        console.log(\"get_division\")\r\n        let modal_body = document.getElementById('division_body')\r\n        let xmlhttp = getXmlHttp()\r\n        xmlhttp.open('POST', '/api', true)\r\n        xmlhttp.setRequestHeader('Content-Type', 'application/json')\r\n\r\n        xmlhttp.send(JSON.stringify({\"api_method\": \"get_division\"}))\r\n        xmlhttp.onreadystatechange = function () {\r\n            if (xmlhttp.readyState == 4) {\r\n                if (xmlhttp.status == 200) {\r\n                    let answer = JSON.parse(xmlhttp.responseText)\r\n                    console.log(answer[0][\"idDivision\"])\r\n                    for (var i = 0; i < answer.length; i++) {\r\n                        modal_body.appendChild(createDiv('division', answer[i]['shortTitle'], answer[i]['idDivision']));\r\n                    }\r\n\r\n                }\r\n            }\r\n        }\r\n    }\r\n    var modal = document.getElementById('myModal');\r\n    var btn = document.getElementById(\"myBtn\");\r\n    var span = document.getElementsByClassName(\"close\")[0];\r\n    btn.onclick = function () {\r\n        get_division()\r\n        modal.style.display = \"block\";\r\n    }\r\n    span.onclick = function () {\r\n        modal.style.display = \"none\";\r\n    }\r\n    window.onclick = function (event) {\r\n        if (event.target == modal) {\r\n            modal.style.display = \"none\";\r\n        }\r\n    }\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- complete/src/main/resources/static/index/scripts.js	(revision 90b227a8e4dda066695a0dc7d8e30aac68e5bbd4)
++++ complete/src/main/resources/static/index/scripts.js	(date 1602695686462)
+@@ -4,17 +4,42 @@
+         console.log(get_cookie("login_key"))
+         window.location = "/login"
+     }
+-    first = function () {
+-        document.getElementById("second_hide").setAttribute("style", "opacity:1; transition: 1s; height: 100%;");
+-        document.getElementById("first").setAttribute("style", "display: none");
+-        document.getElementById("first_yelloy").setAttribute("style", "display: block");
++    divisionStuds = function () {
++        document.getElementById("division_body").setAttribute("style", "opacity:1; transition: 1s; height: 100%;");
++        document.getElementById("divisionStuds").setAttribute("style", "display: none");
++        document.getElementById("divisionStudsNone").setAttribute("style", "display: block");
+ 
+     }
+ 
+-    first_yelloy = function () {
+-        document.getElementById("second_hide").setAttribute("style", "display: none");
+-        document.getElementById("first_yelloy").setAttribute("style", "display: none");
+-        document.getElementById("first").setAttribute("style", "display: block");
++    divisionStudsNone = function () {
++        document.getElementById("division_body").setAttribute("style", "display: none");
++        document.getElementById("divisionStudsNone").setAttribute("style", "display: none");
++        document.getElementById("divisionStuds").setAttribute("style", "display: block");
++
++    }
++    kurs = function () {
++        document.getElementById("division_body").setAttribute("style", "opacity:1; transition: 1s; height: 100%;");
++        document.getElementById("divisionStuds").setAttribute("style", "display: none");
++        document.getElementById("divisionStudsNone").setAttribute("style", "display: block");
++
++    }
++
++    kursNone = function () {
++        document.getElementById("division_body").setAttribute("style", "display: none");
++        document.getElementById("divisionStudsNone").setAttribute("style", "display: none");
++        document.getElementById("divisionStuds").setAttribute("style", "display: block");
++
++    }group = function () {
++        document.getElementById("division_body").setAttribute("style", "opacity:1; transition: 1s; height: 100%;");
++        document.getElementById("divisionStuds").setAttribute("style", "display: none");
++        document.getElementById("divisionStudsNone").setAttribute("style", "display: block");
++
++    }
++
++    groupNone = function () {
++        document.getElementById("division_body").setAttribute("style", "display: none");
++        document.getElementById("divisionStudsNone").setAttribute("style", "display: none");
++        document.getElementById("divisionStuds").setAttribute("style", "display: block");
+ 
+     }
+ 
+@@ -28,13 +53,30 @@
+         input.value = value
+         input.id = id
+         input.onclick = function () {
+-            console.log(this.id)
++            divisionStudsNone()
+         }
+         return input;
+     }
+ 
+     get_kurs = function (id) {
++        let modal_body = document.getElementById('division_body')
++        let xmlhttp = getXmlHttp()
++        xmlhttp.open('POST', '/api', true)
++        xmlhttp.setRequestHeader('Content-Type', 'application/json')
+ 
++        xmlhttp.send(JSON.stringify({"api_method": "get_division"}))
++        xmlhttp.onreadystatechange = function () {
++            if (xmlhttp.readyState == 4) {
++                if (xmlhttp.status == 200) {
++                    let answer = JSON.parse(xmlhttp.responseText)
++                    console.log(answer[0]["idDivision"])
++                    for (var i = 0; i < answer.length; i++) {
++                        modal_body.appendChild(createDiv('division', answer[i]['shortTitle'], answer[i]['idDivision']));
++                    }
++
++                }
++            }
++        }
+     }
+     get_division = function () {
+         console.log("get_division")
+Index: complete/src/main/resources/templates/index.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE HTML>\r\n<html xmlns:th=\"http://www.w3.org/1999/xhtml\">\r\n<head>\r\n    <title></title>\r\n    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/>\r\n    <script src=\"scripts.js\"></script>\r\n    <script src=\"index/scripts.js\"></script>\r\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"index/style.css\">\r\n</head>\r\n<body>\r\n<p th:text=\"${name} +' '+ ${surname}\"/>\r\n<input type=\"button\" id=\"exit\" value=\"Exit\" onclick=\"delete_cookie('login_key')\">\r\n\r\n\r\n<input type=\"button\" id=\"myBtn\" value=\"Добавить групу\" onclick=\"get_division()\">\r\n\r\n\r\n<div id=\"myModal\" class=\"modal\">\r\n\r\n\r\n    <div class=\"modal-content\">\r\n        <div class=\"modal-header\">\r\n            <span class=\"close\">&times;</span>\r\n            <h1>Добавление группы</h1>\r\n        </div>\r\n        <div id=\"modal\" class=\"modal-body\">\r\n            <div>\r\n\r\n                <p id=\"first\" onclick=\"first()\">Показать блок</p>\r\n\r\n                <p id=\"first_yelloy\" style=\"display:none\" onclick=\"first_yelloy()\">Скрыть блок </p>\r\n\r\n                <div id=\"second_hide\" style=\"display:none\">\r\n\r\n                    здесь дргой блок с текстом...\r\n\r\n                </div>\r\n\r\n            </div>\r\n\r\n\r\n            <div class=\"panel-group\" id=\"accordionStud\">\r\n                <div id=\"divisionStuds\" class=\"panel panel-default\">\r\n                    <div class=\"panel-heading\">\r\n                        <h4 class=\"panel-title\">\r\n                            <a data-toggle=\"collapse\" data-parent=\"#accordionStud\" href=\"#collapseDivStud\">\r\n                                Факультет/институт\r\n                            </a>\r\n                        </h4>\r\n                    </div>\r\n                    <div id=\"collapseDivStud\" class=\"panel-collapse collapse in\">\r\n                        <div id=\"division_body\" class=\"panel-body\">\r\n\r\n                        </div>\r\n                    </div>\r\n                    <div id=\"kurs\" class=\"panel panel-default\">\r\n                        <div class=\"panel-heading\">\r\n                            <h4 class=\"panel-title\">\r\n                                <a data-toggle=\"collapse\" class=\"collapsed\" data-parent=\"#accordionStud\"\r\n                                   href=\"#collapseKurs\">\r\n                                    Курс\r\n                                </a>\r\n                            </h4>\r\n                        </div>\r\n                        <div id=\"collapseKurs\" class=\"panel-collapse collapse\">\r\n                            <div class=\"panel-body\">\r\n\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div id=\"group\" class=\"panel panel-default\">\r\n                        <div class=\"panel-heading\">\r\n                            <h4 class=\"panel-title\">\r\n                                <a data-toggle=\"collapse\" class=\"collapsed\" data-parent=\"#accordionStud\"\r\n                                   href=\"#collapseGroup\">\r\n                                    Группа\r\n                                </a>\r\n                            </h4>\r\n                        </div>\r\n                        <div id=\"collapseGroup\" class=\"panel-collapse collapse\">\r\n                            <div class=\"panel-body\">\r\n\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"modal-footer\">\r\n\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n\r\n\r\n</div>\r\n</body>\r\n</html>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- complete/src/main/resources/templates/index.html	(revision 90b227a8e4dda066695a0dc7d8e30aac68e5bbd4)
++++ complete/src/main/resources/templates/index.html	(date 1602695686478)
+@@ -26,65 +26,32 @@
+         <div id="modal" class="modal-body">
+             <div>
+ 
+-                <p id="first" onclick="first()">Показать блок</p>
+-
+-                <p id="first_yelloy" style="display:none" onclick="first_yelloy()">Скрыть блок </p>
++                <p id="divisionStuds" onclick="divisionStuds()">Факультет/Институт</p>
+ 
+-                <div id="second_hide" style="display:none">
++                <p id="divisionStudsNone" style="display:none" onclick="divisionStudsNone()">Скрыть блок </p>
+ 
+-                    здесь дргой блок с текстом...
++                <div id="division_body" style="display:none">
+ 
+                 </div>
+-
+-            </div>
+-
+-
+-            <div class="panel-group" id="accordionStud">
+-                <div id="divisionStuds" class="panel panel-default">
+-                    <div class="panel-heading">
+-                        <h4 class="panel-title">
+-                            <a data-toggle="collapse" data-parent="#accordionStud" href="#collapseDivStud">
+-                                Факультет/институт
+-                            </a>
+-                        </h4>
+-                    </div>
+-                    <div id="collapseDivStud" class="panel-collapse collapse in">
+-                        <div id="division_body" class="panel-body">
+-
+-                        </div>
+-                    </div>
+-                    <div id="kurs" class="panel panel-default">
+-                        <div class="panel-heading">
+-                            <h4 class="panel-title">
+-                                <a data-toggle="collapse" class="collapsed" data-parent="#accordionStud"
+-                                   href="#collapseKurs">
+-                                    Курс
+-                                </a>
+-                            </h4>
+-                        </div>
+-                        <div id="collapseKurs" class="panel-collapse collapse">
+-                            <div class="panel-body">
++                <p id="kurs" onclick="kurs()">Курс</p>
++
++                <p id="kursNone" style="display:none" onclick="kursNone()">Скрыть блок </p>
++
++                <div id="kurs_body" style="display:none">
++
++                </div>
++                <p id="group" onclick="group()">Группа</p>
+ 
+-                            </div>
+-                        </div>
+-                    </div>
+-                    <div id="group" class="panel panel-default">
+-                        <div class="panel-heading">
+-                            <h4 class="panel-title">
+-                                <a data-toggle="collapse" class="collapsed" data-parent="#accordionStud"
+-                                   href="#collapseGroup">
+-                                    Группа
+-                                </a>
+-                            </h4>
+-                        </div>
+-                        <div id="collapseGroup" class="panel-collapse collapse">
+-                            <div class="panel-body">
++                <p id="groupNone" style="display:none" onclick="groupNone()">Скрыть блок </p>
+ 
+-                            </div>
+-                        </div>
+-                    </div>
++                <div id="group_body" style="display:none">
++
+                 </div>
++
+             </div>
++
++
++
+             <div class="modal-footer">
+ 
+             </div>
+Index: complete/build/resources/main/static/index/style.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\r\n\r\nbody {font-family: Arial, Helvetica, sans-serif;}\r\n\r\n#myBtn {\r\n    background-color: #4160fc;\r\n    color: white;\r\n    padding: 12px 16px;\r\n    font-size: 18px;\r\n    font-weight: bold;\r\n    border: none;\r\n    cursor: pointer;\r\n    width: 180px;\r\n}\r\n\r\n.division{\r\n    color: white;\r\n    font-size: 18px;\r\n}\r\n.modal {\r\n    display: none; /* Hidden by default */\r\n    position: fixed; /* Stay in place */\r\n    z-index: 1; /* Sit on top */\r\n    padding-top: 100px; /* Location of the box */\r\n    left: 0;\r\n    top: 0;\r\n    width: 100%; /* Full width */\r\n    height: 100%; /* Full height */\r\n    overflow: auto; /* Enable scroll if needed */\r\n    background-color: rgb(0,0,0); /* Fallback color */\r\n    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */\r\n}\r\n\r\n\r\n.modal-content {\r\n    position: relative;\r\n    background-color: #bed0e7;\r\n    margin: auto;\r\n    padding: 0;\r\n    border: 5px solid #4170ff;\r\n    width: 50%;\r\n    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);\r\n    -webkit-animation-name: animatetop;\r\n    -webkit-animation-duration: 0.4s;\r\n    animation-name: animatetop;\r\n    animation-duration: 0.4s\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- complete/build/resources/main/static/index/style.css	(revision 90b227a8e4dda066695a0dc7d8e30aac68e5bbd4)
++++ complete/build/resources/main/static/index/style.css	(date 1602695117017)
+@@ -1,6 +1,7 @@
+ 
+-
+-body {font-family: Arial, Helvetica, sans-serif;}
++body {
++    font-family: Arial, Helvetica, sans-serif;
++}
+ 
+ #myBtn {
+     background-color: #4160fc;
+@@ -13,10 +14,11 @@
+     width: 180px;
+ }
+ 
+-.division{
++.division {
+     color: white;
+     font-size: 18px;
+ }
++
+ .modal {
+     display: none; /* Hidden by default */
+     position: fixed; /* Stay in place */
+@@ -27,8 +29,8 @@
+     width: 100%; /* Full width */
+     height: 100%; /* Full height */
+     overflow: auto; /* Enable scroll if needed */
+-    background-color: rgb(0,0,0); /* Fallback color */
+-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
++    background-color: rgb(0, 0, 0); /* Fallback color */
++    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+ }
+ 
+ 
+@@ -39,9 +41,32 @@
+     padding: 0;
+     border: 5px solid #4170ff;
+     width: 50%;
+-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
++    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+     -webkit-animation-name: animatetop;
+     -webkit-animation-duration: 0.4s;
+     animation-name: animatetop;
+     animation-duration: 0.4s
+-}
+\ No newline at end of file
++}
++
++
++p#first {
++    cursor: pointer;
++    font-family: cursive;
++    line-height: 13px;
++    text-indent: 22px;
++    line-height: 33px;
++    border: 1px solid #d2d2d2;
++    font-size: 18px;
++
++}
++
++p#first_yelloy {
++    cursor: pointer;
++    background: #144498;
++    font-size: 18px;
++    color: white;
++    text-indent: 22px;
++    line-height: 33px;
++    border: 1PX SOLID #144498;
++
++}
+Index: complete/build/resources/main/templates/index.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE HTML>\r\n<html xmlns:th=\"http://www.w3.org/1999/xhtml\">\r\n<head>\r\n    <title></title>\r\n    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/>\r\n    <script src=\"scripts.js\"></script>\r\n    <script src=\"index/scripts.js\"></script>\r\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"index/style.css\">\r\n</head>\r\n<body>\r\n<p th:text=\"${name} +' '+ ${surname}\"/>\r\n<input type=\"button\" id=\"exit\" value=\"Exit\" onclick=\"delete_cookie('login_key')\">\r\n\r\n\r\n\r\n\r\n<input type=\"button\" id=\"myBtn\" value=\"Добавить групу\" onclick=\"get_division()\">\r\n\r\n\r\n\r\n<div id=\"myModal\" class=\"modal\">\r\n\r\n\r\n    <div class=\"modal-content\">\r\n        <div class=\"modal-header\">\r\n            <span class=\"close\">&times;</span>\r\n            <h1>Добавление группы</h1>\r\n        </div>\r\n        <div id=\"modal\" class=\"modal-body\">\r\n            <div class=\"panel-group\" id=\"accordionStud\">\r\n                <div id=\"divisionStuds\" class=\"panel panel-default\">\r\n                    <div class=\"panel-heading\">\r\n                        <h4 class=\"panel-title\">\r\n                            <a data-toggle=\"collapse\" data-parent=\"#accordionStud\" href=\"#collapseDivStud\">\r\n                                Факультет/институт\r\n                            </a>\r\n                        </h4>\r\n                    </div>\r\n                    <div id=\"collapseDivStud\" class=\"panel-collapse collapse in\">\r\n                        <div id=\"division_body\" class=\"panel-body\">\r\n\r\n                        </div>\r\n                </div>\r\n                <div id=\"kurs\" class=\"panel panel-default\">\r\n                    <div class=\"panel-heading\">\r\n                        <h4 class=\"panel-title\">\r\n                            <a data-toggle=\"collapse\" class=\"collapsed\" data-parent=\"#accordionStud\" href=\"#collapseKurs\">\r\n                                Курс\r\n                            </a>\r\n                        </h4>\r\n                    </div>\r\n                    <div id=\"collapseKurs\" class=\"panel-collapse collapse\">\r\n                        <div class=\"panel-body\">\r\n\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div id=\"group\" class=\"panel panel-default\">\r\n                    <div class=\"panel-heading\">\r\n                        <h4 class=\"panel-title\">\r\n                            <a data-toggle=\"collapse\" class=\"collapsed\" data-parent=\"#accordionStud\" href=\"#collapseGroup\">\r\n                                Группа\r\n                            </a>\r\n                        </h4>\r\n                    </div>\r\n                    <div id=\"collapseGroup\" class=\"panel-collapse collapse\">\r\n                        <div class=\"panel-body\">\r\n\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"modal-footer\">\r\n\r\n        </div>\r\n    </div>\r\n\r\n</div>\r\n\r\n\r\n\r\n</div>\r\n</body>\r\n</html>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- complete/build/resources/main/templates/index.html	(revision 90b227a8e4dda066695a0dc7d8e30aac68e5bbd4)
++++ complete/build/resources/main/templates/index.html	(date 1602695117057)
+@@ -12,12 +12,9 @@
+ <input type="button" id="exit" value="Exit" onclick="delete_cookie('login_key')">
+ 
+ 
+-
+-
+ <input type="button" id="myBtn" value="Добавить групу" onclick="get_division()">
+ 
+ 
+-
+ <div id="myModal" class="modal">
+ 
+ 
+@@ -27,8 +24,21 @@
+             <h1>Добавление группы</h1>
+         </div>
+         <div id="modal" class="modal-body">
++            <div>
++
++                <p id="divisionStuds" onclick="divisionStuds()">Факультет/Институт</p>
++
++                <p id="divisionStudsNone" style="display:none" onclick="divisionStudsNone()">Скрыть блок </p>
++
++                <div id="division_body" style="display:none">
++
++                </div>
++
++            </div>
++
++
+             <div class="panel-group" id="accordionStud">
+-                <div id="divisionStuds" class="panel panel-default">
++                <div id="divisionStud s" class="panel panel-default">
+                     <div class="panel-heading">
+                         <h4 class="panel-title">
+                             <a data-toggle="collapse" data-parent="#accordionStud" href="#collapseDivStud">
+@@ -37,49 +47,50 @@
+                         </h4>
+                     </div>
+                     <div id="collapseDivStud" class="panel-collapse collapse in">
+-                        <div id="division_body" class="panel-body">
++                        <div id=" " class="panel-body">
+ 
+                         </div>
+-                </div>
+-                <div id="kurs" class="panel panel-default">
+-                    <div class="panel-heading">
+-                        <h4 class="panel-title">
+-                            <a data-toggle="collapse" class="collapsed" data-parent="#accordionStud" href="#collapseKurs">
+-                                Курс
+-                            </a>
+-                        </h4>
+-                    </div>
+-                    <div id="collapseKurs" class="panel-collapse collapse">
+-                        <div class="panel-body">
++                    </div>
++                    <div id="kurs" class="panel panel-default">
++                        <div class="panel-heading">
++                            <h4 class="panel-title">
++                                <a data-toggle="collapse" class="collapsed" data-parent="#accordionStud"
++                                   href="#collapseKurs">
++                                    Курс
++                                </a>
++                            </h4>
++                        </div>
++                        <div id="collapseKurs" class="panel-collapse collapse">
++                            <div class="panel-body">
+ 
+-                        </div>
+-                    </div>
+-                </div>
+-                <div id="group" class="panel panel-default">
+-                    <div class="panel-heading">
+-                        <h4 class="panel-title">
+-                            <a data-toggle="collapse" class="collapsed" data-parent="#accordionStud" href="#collapseGroup">
+-                                Группа
+-                            </a>
+-                        </h4>
+-                    </div>
+-                    <div id="collapseGroup" class="panel-collapse collapse">
+-                        <div class="panel-body">
++                            </div>
++                        </div>
++                    </div>
++                    <div id="group" class="panel panel-default">
++                        <div class="panel-heading">
++                            <h4 class="panel-title">
++                                <a data-toggle="collapse" class="collapsed" data-parent="#accordionStud"
++                                   href="#collapseGroup">
++                                    Группа
++                                </a>
++                            </h4>
++                        </div>
++                        <div id="collapseGroup" class="panel-collapse collapse">
++                            <div class="panel-body">
+ 
+-                        </div>
+-                    </div>
+-                </div>
+-            </div>
+-        </div>
+-        <div class="modal-footer">
++                            </div>
++                        </div>
++                    </div>
++                </div>
++            </div>
++            <div class="modal-footer">
+ 
+-        </div>
+-    </div>
++            </div>
++        </div>
+ 
+-</div>
++    </div>
+ 
+ 
+-
+ </div>
+ </body>
+ </html>
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"BranchesTreeState\">\r\n    <expand>\r\n      <path>\r\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"LOCAL_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n      </path>\r\n      <path>\r\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"REMOTE_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n      </path>\r\n      <path>\r\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"REMOTE_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"GROUP_NODE:origin\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n      </path>\r\n    </expand>\r\n    <select />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"b8959205-b303-4dcc-9433-c3d711db312c\" name=\"Default Changelist\" comment=\"init\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/complete/.gradle/6.5.1/executionHistory/executionHistory.bin\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/complete/.gradle/6.5.1/executionHistory/executionHistory.bin\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/complete/.gradle/6.5.1/executionHistory/executionHistory.lock\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/complete/.gradle/6.5.1/executionHistory/executionHistory.lock\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/complete/.gradle/6.5.1/fileHashes/fileHashes.bin\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/complete/.gradle/6.5.1/fileHashes/fileHashes.bin\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/complete/.gradle/6.5.1/fileHashes/fileHashes.lock\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/complete/.gradle/6.5.1/fileHashes/fileHashes.lock\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/complete/.gradle/6.5.1/javaCompile/classAnalysis.bin\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/complete/.gradle/6.5.1/javaCompile/classAnalysis.bin\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/complete/.gradle/6.5.1/javaCompile/javaCompile.lock\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/complete/.gradle/6.5.1/javaCompile/javaCompile.lock\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/complete/.gradle/buildOutputCleanup/buildOutputCleanup.lock\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/complete/.gradle/buildOutputCleanup/buildOutputCleanup.lock\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/complete/build/resources/main/static/index/scripts.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/complete/build/resources/main/static/index/scripts.js\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/complete/build/resources/main/templates/index.html\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/complete/build/resources/main/templates/index.html\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/complete/build/tmp/compileJava/source-classes-mapping.txt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/complete/build/tmp/compileJava/source-classes-mapping.txt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/complete/src/main/java/com/schedule/system/database/DatabaseConnection.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/complete/src/main/java/com/schedule/system/database/DatabaseConnection.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/complete/src/main/resources/static/index/scripts.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/complete/src/main/resources/static/index/scripts.js\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/complete/src/main/resources/static/index/style.css\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/complete/src/main/resources/static/index/style.css\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/complete/src/main/resources/templates/index.html\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/complete/src/main/resources/templates/index.html\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ExternalProjectsData\">\r\n    <projectState path=\"$PROJECT_DIR$/complete\">\r\n      <ProjectState />\r\n    </projectState>\r\n    <projectState path=\"$PROJECT_DIR$/initial\">\r\n      <ProjectState />\r\n    </projectState>\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"CSS File\" />\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"master\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MavenImportPreferences\">\r\n    <option name=\"generalSettings\">\r\n      <MavenGeneralSettings>\r\n        <option name=\"mavenHome\" value=\"C:\\IntelliJ IDEA 2020.2.3\\plugins\\maven\\lib\\maven3\" />\r\n      </MavenGeneralSettings>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"1imjrdBdMePQVulVRyxMzQlbUj8\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"DatabaseDriversLRU\" value=\"postgresql\" />\r\n    <property name=\"RequestMappingsPanelOrder0\" value=\"0\" />\r\n    <property name=\"RequestMappingsPanelOrder1\" value=\"1\" />\r\n    <property name=\"RequestMappingsPanelWidth0\" value=\"75\" />\r\n    <property name=\"RequestMappingsPanelWidth1\" value=\"75\" />\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"SHARE_PROJECT_CONFIGURATION_FILES\" value=\"true\" />\r\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\r\n    <property name=\"aspect.path.notification.shown\" value=\"true\" />\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$/complete/src/main/resources\" />\r\n    <property name=\"list.type.of.created.stylesheet\" value=\"CSS\" />\r\n    <property name=\"node.js.detected.package.eslint\" value=\"true\" />\r\n    <property name=\"node.js.detected.package.tslint\" value=\"true\" />\r\n    <property name=\"node.js.path.for.package.eslint\" value=\"project\" />\r\n    <property name=\"node.js.path.for.package.tslint\" value=\"project\" />\r\n    <property name=\"node.js.selected.package.eslint\" value=\"(autodetect)\" />\r\n    <property name=\"node.js.selected.package.tslint\" value=\"(autodetect)\" />\r\n    <property name=\"nodejs_package_manager_path\" value=\"npm\" />\r\n    <property name=\"settings.editor.selected.configurable\" value=\"editor.preferences.fonts.default\" />\r\n    <property name=\"show.run.dashboard.notification\" value=\"false\" />\r\n  </component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\pader\\Desktop\\test\\Schedule\\complete\\src\\main\\resources\\static\\index\" />\r\n      <recent name=\"C:\\Users\\pader\\Desktop\\test\\Schedule\\complete\\src\\main\\resources\\static\" />\r\n    </key>\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\test\\complete\\src\\main\\resources\" />\r\n      <recent name=\"C:\\test\\complete\\src\\main\" />\r\n      <recent name=\"C:\\test\\complete\\src\\main\\java\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Spring Boot.ServingWebContentApplication (2)\">\r\n    <configuration default=\"true\" type=\"ArquillianJUnit\" factoryName=\"\" nameIsGenerated=\"true\">\r\n      <option name=\"arquillianRunConfiguration\">\r\n        <value>\r\n          <option name=\"containerStateName\" value=\"\" />\r\n        </value>\r\n      </option>\r\n      <option name=\"TEST_OBJECT\" value=\"class\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"complete [dependencies]\" type=\"GradleRunConfiguration\" factoryName=\"Gradle\" temporary=\"true\">\r\n      <ExternalSystemSettings>\r\n        <option name=\"executionName\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$/complete\" />\r\n        <option name=\"externalSystemIdString\" value=\"GRADLE\" />\r\n        <option name=\"scriptParameters\" />\r\n        <option name=\"taskDescriptions\">\r\n          <list />\r\n        </option>\r\n        <option name=\"taskNames\">\r\n          <list>\r\n            <option value=\"dependencies\" />\r\n          </list>\r\n        </option>\r\n        <option name=\"vmOptions\" />\r\n      </ExternalSystemSettings>\r\n      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"ServingWebContentApplication (1)\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"serving-web-content.main\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"schedule.web.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"schedule.web.ServingWebContentApplication\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"ServingWebContentApplication (2)\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"serving-web-content.main\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.schedule.web.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"com.schedule.web.ServingWebContentApplication\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"ServingWebContentApplication\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\">\r\n      <module name=\"serving-web-content.main\" />\r\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"com.example.servingwebcontent.ServingWebContentApplication\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Spring Boot.ServingWebContentApplication (2)\" />\r\n        <item itemvalue=\"Spring Boot.ServingWebContentApplication (1)\" />\r\n        <item itemvalue=\"Gradle.complete [dependencies]\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"SpringBeansView\">\r\n    <option name=\"showFilesets\" value=\"false\" />\r\n    <option name=\"showFiles\" value=\"false\" />\r\n    <option name=\"showDoc\" value=\"false\" />\r\n    <option name=\"beanDetailsProportion\" value=\"0.3\" />\r\n  </component>\r\n  <component name=\"SpringMvcView\">\r\n    <option name=\"showModules\" value=\"false\" />\r\n  </component>\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"b8959205-b303-4dcc-9433-c3d711db312c\" name=\"Default Changelist\" comment=\"\" />\r\n      <created>1602519861048</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1602519861048</updated>\r\n      <workItem from=\"1602519862648\" duration=\"585000\" />\r\n      <workItem from=\"1602520590575\" duration=\"1885000\" />\r\n      <workItem from=\"1602522497505\" duration=\"28000\" />\r\n      <workItem from=\"1602522557963\" duration=\"6000\" />\r\n      <workItem from=\"1602523239772\" duration=\"812000\" />\r\n      <workItem from=\"1602600127958\" duration=\"10453000\" />\r\n      <workItem from=\"1602679020623\" duration=\"10407000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"init\">\r\n      <created>1602523561594</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1602523561594</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"init\">\r\n      <created>1602688760157</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1602688760157</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"3\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"init\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"init\" />\r\n  </component>\r\n  <component name=\"WindowStateProjectService\">\r\n    <state x=\"552\" y=\"178\" key=\"#com.intellij.execution.impl.EditConfigurationsDialog\" timestamp=\"1602690043991\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state x=\"552\" y=\"178\" key=\"#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1602690043991\" />\r\n    <state x=\"83\" y=\"16\" key=\"DiffContextDialog\" timestamp=\"1602600298727\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state x=\"83\" y=\"16\" key=\"DiffContextDialog/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1602600298727\" />\r\n    <state x=\"810\" y=\"417\" key=\"Github.ShareDialog\" timestamp=\"1602600421302\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state x=\"810\" y=\"417\" key=\"Github.ShareDialog/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1602600421302\" />\r\n    <state width=\"1877\" height=\"282\" key=\"GridCell.Tab.0.bottom\" timestamp=\"1602692170563\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state width=\"1493\" height=\"347\" key=\"GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824\" timestamp=\"1602524052178\" />\r\n    <state width=\"1877\" height=\"282\" key=\"GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1602692170563\" />\r\n    <state width=\"1877\" height=\"282\" key=\"GridCell.Tab.0.center\" timestamp=\"1602692170563\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state width=\"1493\" height=\"347\" key=\"GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824\" timestamp=\"1602524052178\" />\r\n    <state width=\"1877\" height=\"282\" key=\"GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1602692170563\" />\r\n    <state width=\"1877\" height=\"282\" key=\"GridCell.Tab.0.left\" timestamp=\"1602692170563\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state width=\"1493\" height=\"347\" key=\"GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824\" timestamp=\"1602524052177\" />\r\n    <state width=\"1877\" height=\"282\" key=\"GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1602692170563\" />\r\n    <state width=\"1877\" height=\"282\" key=\"GridCell.Tab.0.right\" timestamp=\"1602692170563\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state width=\"1493\" height=\"347\" key=\"GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824\" timestamp=\"1602524052178\" />\r\n    <state width=\"1877\" height=\"282\" key=\"GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1602692170563\" />\r\n    <state width=\"1877\" height=\"282\" key=\"GridCell.Tab.1.bottom\" timestamp=\"1602692170563\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state width=\"1493\" height=\"347\" key=\"GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824\" timestamp=\"1602524052178\" />\r\n    <state width=\"1877\" height=\"282\" key=\"GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1602692170563\" />\r\n    <state width=\"1877\" height=\"282\" key=\"GridCell.Tab.1.center\" timestamp=\"1602692170563\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state width=\"1493\" height=\"347\" key=\"GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824\" timestamp=\"1602524052178\" />\r\n    <state width=\"1877\" height=\"282\" key=\"GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1602692170563\" />\r\n    <state width=\"1877\" height=\"282\" key=\"GridCell.Tab.1.left\" timestamp=\"1602692170563\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state width=\"1493\" height=\"347\" key=\"GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824\" timestamp=\"1602524052178\" />\r\n    <state width=\"1877\" height=\"282\" key=\"GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1602692170563\" />\r\n    <state width=\"1877\" height=\"282\" key=\"GridCell.Tab.1.right\" timestamp=\"1602692170563\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state width=\"1493\" height=\"347\" key=\"GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824\" timestamp=\"1602524052178\" />\r\n    <state width=\"1877\" height=\"282\" key=\"GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1602692170563\" />\r\n    <state x=\"461\" y=\"164\" key=\"SettingsEditor\" timestamp=\"1602679431651\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state x=\"461\" y=\"164\" key=\"SettingsEditor/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1602679431651\" />\r\n    <state x=\"451\" y=\"183\" key=\"Vcs.Push.Dialog.v2\" timestamp=\"1602688762933\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state x=\"361\" y=\"145\" key=\"Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824\" timestamp=\"1602523566840\" />\r\n    <state x=\"451\" y=\"183\" key=\"Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1602688762933\" />\r\n    <state x=\"733\" y=\"411\" key=\"com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2\" timestamp=\"1602688717766\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state x=\"586\" y=\"326\" key=\"com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824\" timestamp=\"1602522151831\" />\r\n    <state x=\"733\" y=\"411\" key=\"com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1602688717766\" />\r\n    <state x=\"209\" y=\"32\" key=\"new project wizard\" timestamp=\"1602520430609\">\r\n      <screen x=\"0\" y=\"0\" width=\"1536\" height=\"824\" />\r\n    </state>\r\n    <state x=\"209\" y=\"32\" key=\"new project wizard/0.0.1536.824@0.0.1536.824\" timestamp=\"1602520430609\" />\r\n    <state x=\"616\" y=\"240\" key=\"run.anything.popup\" timestamp=\"1602679057513\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state x=\"616\" y=\"240\" key=\"run.anything.popup/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1602679057513\" />\r\n    <state x=\"623\" y=\"225\" width=\"672\" height=\"678\" key=\"search.everywhere.popup\" timestamp=\"1602604614752\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state x=\"623\" y=\"225\" width=\"672\" height=\"678\" key=\"search.everywhere.popup/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1602604614752\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\r\n          <url>file://$PROJECT_DIR$/complete/src/main/java/schedule/web/ServingWebContentApplication.java</url>\r\n          <line>9</line>\r\n          <option name=\"timeStamp\" value=\"1\" />\r\n        </line-breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/workspace.xml	(revision 90b227a8e4dda066695a0dc7d8e30aac68e5bbd4)
++++ .idea/workspace.xml	(date 1602695686515)
+@@ -22,19 +22,16 @@
+     <select />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="b8959205-b303-4dcc-9433-c3d711db312c" name="Default Changelist" comment="init">
++    <list default="true" id="b8959205-b303-4dcc-9433-c3d711db312c" name="Default Changelist" comment="database">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/complete/.gradle/6.5.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/complete/.gradle/6.5.1/executionHistory/executionHistory.bin" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/complete/.gradle/6.5.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/complete/.gradle/6.5.1/executionHistory/executionHistory.lock" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/complete/.gradle/6.5.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/complete/.gradle/6.5.1/fileHashes/fileHashes.bin" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/complete/.gradle/6.5.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/complete/.gradle/6.5.1/fileHashes/fileHashes.lock" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/complete/.gradle/6.5.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/complete/.gradle/6.5.1/javaCompile/classAnalysis.bin" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/complete/.gradle/6.5.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/complete/.gradle/6.5.1/javaCompile/javaCompile.lock" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/complete/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/complete/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/complete/build/resources/main/static/index/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/complete/build/resources/main/static/index/scripts.js" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/complete/build/resources/main/static/index/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/complete/build/resources/main/static/index/style.css" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/complete/build/resources/main/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/complete/build/resources/main/templates/index.html" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/complete/build/tmp/compileJava/source-classes-mapping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/complete/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/complete/src/main/java/com/schedule/system/database/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/complete/src/main/java/com/schedule/system/database/DatabaseConnection.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/complete/src/main/resources/static/index/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/complete/src/main/resources/static/index/scripts.js" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/complete/src/main/resources/static/index/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/complete/src/main/resources/static/index/style.css" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/complete/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/complete/src/main/resources/templates/index.html" afterDir="false" />
+@@ -76,11 +73,15 @@
+     </option>
+   </component>
+   <component name="ProjectId" id="1imjrdBdMePQVulVRyxMzQlbUj8" />
++  <component name="ProjectLevelVcsManager">
++    <ConfirmationsSetting value="2" id="Add" />
++  </component>
+   <component name="ProjectViewState">
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+   <component name="PropertiesComponent">
++    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+     <property name="DatabaseDriversLRU" value="postgresql" />
+     <property name="RequestMappingsPanelOrder0" value="0" />
+     <property name="RequestMappingsPanelOrder1" value="1" />
+@@ -208,7 +209,7 @@
+       <workItem from="1602522557963" duration="6000" />
+       <workItem from="1602523239772" duration="812000" />
+       <workItem from="1602600127958" duration="10453000" />
+-      <workItem from="1602679020623" duration="10407000" />
++      <workItem from="1602679020623" duration="12042000" />
+     </task>
+     <task id="LOCAL-00001" summary="init">
+       <created>1602523561594</created>
+@@ -224,7 +225,21 @@
+       <option name="project" value="LOCAL" />
+       <updated>1602688760157</updated>
+     </task>
+-    <option name="localTasksCounter" value="3" />
++    <task id="LOCAL-00003" summary="database">
++      <created>1602694137659</created>
++      <option name="number" value="00003" />
++      <option name="presentableId" value="LOCAL-00003" />
++      <option name="project" value="LOCAL" />
++      <updated>1602694137659</updated>
++    </task>
++    <task id="LOCAL-00004" summary="database">
++      <created>1602694252847</created>
++      <option name="number" value="00004" />
++      <option name="presentableId" value="LOCAL-00004" />
++      <option name="project" value="LOCAL" />
++      <updated>1602694252847</updated>
++    </task>
++    <option name="localTasksCounter" value="5" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -243,8 +258,10 @@
+     <option name="oldMeFiltersMigrated" value="true" />
+   </component>
+   <component name="VcsManagerConfiguration">
++    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+     <MESSAGE value="init" />
+-    <option name="LAST_COMMIT_MESSAGE" value="init" />
++    <MESSAGE value="database" />
++    <option name="LAST_COMMIT_MESSAGE" value="database" />
+   </component>
+   <component name="WindowStateProjectService">
+     <state x="552" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602690043991">
+@@ -259,60 +276,60 @@
+       <screen x="0" y="0" width="1920" height="1040" />
+     </state>
+     <state x="810" y="417" key="Github.ShareDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1602600421302" />
+-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1602692170563">
++    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1602695536401">
+       <screen x="0" y="0" width="1920" height="1040" />
+     </state>
+     <state width="1493" height="347" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1602524052178" />
+-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1602692170563" />
+-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1602692170563">
++    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1602695536401" />
++    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1602695536401">
+       <screen x="0" y="0" width="1920" height="1040" />
+     </state>
+     <state width="1493" height="347" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1602524052178" />
+-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1602692170563" />
+-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1602692170563">
++    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1602695536401" />
++    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1602695536401">
+       <screen x="0" y="0" width="1920" height="1040" />
+     </state>
+     <state width="1493" height="347" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1602524052177" />
+-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1602692170563" />
+-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1602692170563">
++    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1602695536401" />
++    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1602695536401">
+       <screen x="0" y="0" width="1920" height="1040" />
+     </state>
+     <state width="1493" height="347" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1602524052178" />
+-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1602692170563" />
+-    <state width="1877" height="282" key="GridCell.Tab.1.bottom" timestamp="1602692170563">
++    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1602695536401" />
++    <state width="1877" height="282" key="GridCell.Tab.1.bottom" timestamp="1602695536401">
+       <screen x="0" y="0" width="1920" height="1040" />
+     </state>
+     <state width="1493" height="347" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1602524052178" />
+-    <state width="1877" height="282" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1602692170563" />
+-    <state width="1877" height="282" key="GridCell.Tab.1.center" timestamp="1602692170563">
++    <state width="1877" height="282" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1602695536401" />
++    <state width="1877" height="282" key="GridCell.Tab.1.center" timestamp="1602695536401">
+       <screen x="0" y="0" width="1920" height="1040" />
+     </state>
+     <state width="1493" height="347" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1602524052178" />
+-    <state width="1877" height="282" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1602692170563" />
+-    <state width="1877" height="282" key="GridCell.Tab.1.left" timestamp="1602692170563">
++    <state width="1877" height="282" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1602695536401" />
++    <state width="1877" height="282" key="GridCell.Tab.1.left" timestamp="1602695536401">
+       <screen x="0" y="0" width="1920" height="1040" />
+     </state>
+     <state width="1493" height="347" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1602524052178" />
+-    <state width="1877" height="282" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1602692170563" />
+-    <state width="1877" height="282" key="GridCell.Tab.1.right" timestamp="1602692170563">
++    <state width="1877" height="282" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1602695536401" />
++    <state width="1877" height="282" key="GridCell.Tab.1.right" timestamp="1602695536401">
+       <screen x="0" y="0" width="1920" height="1040" />
+     </state>
+     <state width="1493" height="347" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1602524052178" />
+-    <state width="1877" height="282" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1602692170563" />
++    <state width="1877" height="282" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1602695536401" />
+     <state x="461" y="164" key="SettingsEditor" timestamp="1602679431651">
+       <screen x="0" y="0" width="1920" height="1040" />
+     </state>
+     <state x="461" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1602679431651" />
+-    <state x="451" y="183" key="Vcs.Push.Dialog.v2" timestamp="1602688762933">
++    <state x="451" y="183" key="Vcs.Push.Dialog.v2" timestamp="1602694255849">
+       <screen x="0" y="0" width="1920" height="1040" />
+     </state>
+     <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1602523566840" />
+-    <state x="451" y="183" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1602688762933" />
+-    <state x="733" y="411" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1602688717766">
++    <state x="451" y="183" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1602694255849" />
++    <state x="733" y="411" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1602695686462">
+       <screen x="0" y="0" width="1920" height="1040" />
+     </state>
+     <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1602522151831" />
+-    <state x="733" y="411" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1602688717766" />
++    <state x="733" y="411" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1602695686462" />
+     <state x="209" y="32" key="new project wizard" timestamp="1602520430609">
+       <screen x="0" y="0" width="1536" height="824" />
+     </state>
+Index: complete/build/resources/main/static/index/scripts.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>window.onload = function () {\r\n    console.log(get_cookie(\"login_key\"))\r\n    if (get_cookie('login_key') == null) {\r\n        console.log(get_cookie(\"login_key\"))\r\n        window.location = \"/login\"\r\n    }\r\n\r\n    function createDiv(className, value, id) {\r\n        var input = document.createElement('input')\r\n        input.type = 'button'\r\n        input.className = className\r\n        input.style.width = '100px'\r\n        input.style.height = '50px'\r\n        input.style.backgroundColor = 'blue'\r\n        input.value = value\r\n        input.id = id\r\n        input.onclick = function (){\r\n            console.log(this.id)\r\n        }\r\n        return input;\r\n    }\r\n\r\n    get_kurs = function (id){\r\n\r\n    }\r\n    get_division = function () {\r\n        console.log(\"get_division\")\r\n        let modal_body = document.getElementById('division_body')\r\n        let xmlhttp = getXmlHttp()\r\n        xmlhttp.open('POST', '/api', true)\r\n        xmlhttp.setRequestHeader('Content-Type', 'application/json')\r\n\r\n        xmlhttp.send(JSON.stringify({\"api_method\": \"get_division\"}))\r\n        xmlhttp.onreadystatechange = function () {\r\n            if (xmlhttp.readyState == 4) {\r\n                if (xmlhttp.status == 200) {\r\n                    let answer = JSON.parse(xmlhttp.responseText)\r\n                    console.log(answer[0][\"idDivision\"])\r\n                    for (var i = 0; i < answer.length; i++) {\r\n                        modal_body.appendChild(createDiv('division', answer[i]['shortTitle'], answer[i]['idDivision']));\r\n                    }\r\n\r\n                }\r\n            }\r\n        }\r\n    }\r\n    var modal = document.getElementById('myModal');\r\n    var btn = document.getElementById(\"myBtn\");\r\n    var span = document.getElementsByClassName(\"close\")[0];\r\n    btn.onclick = function () {\r\n        get_division()\r\n        modal.style.display = \"block\";\r\n    }\r\n    span.onclick = function () {\r\n        modal.style.display = \"none\";\r\n    }\r\n    window.onclick = function (event) {\r\n        if (event.target == modal) {\r\n            modal.style.display = \"none\";\r\n        }\r\n    }\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- complete/build/resources/main/static/index/scripts.js	(revision 90b227a8e4dda066695a0dc7d8e30aac68e5bbd4)
++++ complete/build/resources/main/static/index/scripts.js	(date 1602695117017)
+@@ -4,6 +4,19 @@
+         console.log(get_cookie("login_key"))
+         window.location = "/login"
+     }
++    divisionStuds = function () {
++        document.getElementById("division_body").setAttribute("style", "opacity:1; transition: 1s; height: 100%;");
++        document.getElementById("divisionStuds").setAttribute("style", "display: none");
++        document.getElementById("divisionStudsNone").setAttribute("style", "display: block");
++
++    }
++
++    divisionStudsNone = function () {
++        document.getElementById("division_body").setAttribute("style", "display: none");
++        document.getElementById("divisionStudsNone").setAttribute("style", "display: none");
++        document.getElementById("divisionStuds").setAttribute("style", "display: block");
++
++    }
+ 
+     function createDiv(className, value, id) {
+         var input = document.createElement('input')
+@@ -14,13 +27,13 @@
+         input.style.backgroundColor = 'blue'
+         input.value = value
+         input.id = id
+-        input.onclick = function (){
+-            console.log(this.id)
++        input.onclick = function () {
++            divisionStudsNone()
+         }
+         return input;
+     }
+ 
+-    get_kurs = function (id){
++    get_kurs = function (id) {
+ 
+     }
+     get_division = function () {

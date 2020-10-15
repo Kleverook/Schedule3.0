@@ -15,10 +15,8 @@ com/schedule/system/database/AuthPerson.java
  com.schedule.system.database.AuthPerson
 com/schedule/system/oreluniver/DivisionList.java
  com.schedule.system.oreluniver.DivisionList
-com/schedule/web/RequestController.java
- com.schedule.web.RequestApi
- com.schedule.web.RequestController
- com.schedule.web.StateLogin
+com/schedule/web/ServingWebContentApplication.java
+ com.schedule.web.ServingWebContentApplication
 com/schedule/system/oreluniver/NumberWeak.java
  com.schedule.system.oreluniver.NumberWeak
 com/schedule/web/HTMLController.java
@@ -29,5 +27,7 @@ com/schedule/system/google/CalendarAPI.java
  com.schedule.system.google.CalendarAPI
 com/schedule/system/oreluniver/KurList.java
  com.schedule.system.oreluniver.KurList
-com/schedule/web/ServingWebContentApplication.java
- com.schedule.web.ServingWebContentApplication
+com/schedule/web/RequestController.java
+ com.schedule.web.RequestApi
+ com.schedule.web.RequestController
+ com.schedule.web.StateLogin
