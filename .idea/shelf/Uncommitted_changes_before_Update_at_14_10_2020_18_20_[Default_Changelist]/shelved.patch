@@ -1,0 +1,525 @@
+Index: complete/src/main/java/com/schedule/web/ServingWebContentApplication.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.schedule.web;\r\n\r\nimport org.springframework.boot.SpringApplication;\r\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\r\n\r\n@SpringBootApplication\r\npublic class ServingWebContentApplication {\r\n\r\n    public static void main(String[] args) {\r\n        SpringApplication.run(ServingWebContentApplication.class, args);\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- complete/src/main/java/com/schedule/web/ServingWebContentApplication.java	(revision 30c9d987028954f64b37b3e3869c02f1941b2b90)
++++ complete/src/main/java/com/schedule/web/ServingWebContentApplication.java	(date 1602605750126)
+@@ -1,8 +1,11 @@
+ package com.schedule.web;
+ 
++import com.schedule.CalendarQuickstart;
+ import org.springframework.boot.SpringApplication;
+ import org.springframework.boot.autoconfigure.SpringBootApplication;
+ 
++import java.util.Calendar;
++
+ @SpringBootApplication
+ public class ServingWebContentApplication {
+ 
+@@ -10,4 +13,4 @@
+         SpringApplication.run(ServingWebContentApplication.class, args);
+     }
+ 
+-}
++}
+\ No newline at end of file
+Index: complete/src/main/java/com/schedule/CalendarQuickstart.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.schedule;\r\n\r\nimport com.google.api.client.auth.oauth2.Credential;\r\nimport com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;\r\nimport com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;\r\nimport com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;\r\nimport com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeRequestUrl;\r\nimport com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;\r\nimport com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;\r\nimport com.google.api.client.http.javanet.NetHttpTransport;\r\nimport com.google.api.client.json.JsonFactory;\r\nimport com.google.api.client.json.jackson2.JacksonFactory;\r\nimport com.google.api.client.util.DateTime;\r\nimport com.google.api.client.util.store.FileDataStoreFactory;\r\nimport com.google.api.services.calendar.Calendar;\r\nimport com.google.api.services.calendar.CalendarScopes;\r\nimport com.google.api.services.calendar.model.Event;\r\nimport com.google.api.services.calendar.model.Events;\r\n\r\nimport java.io.FileNotFoundException;\r\nimport java.io.IOException;\r\nimport java.io.InputStream;\r\nimport java.io.InputStreamReader;\r\nimport java.security.GeneralSecurityException;\r\nimport java.util.Collections;\r\nimport java.util.List;\r\n\r\npublic class CalendarQuickstart {\r\n    private static final String APPLICATION_NAME = \"Google Calendar API Java Quickstart\";\r\n    private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();\r\n    private static final String TOKENS_DIRECTORY_PATH = \"tokens\";\r\n\r\n    /**\r\n     * Global instance of the scopes required by this quickstart.\r\n     * If modifying these scopes, delete your previously saved tokens/ folder.\r\n     */\r\n    private static final List<String> SCOPES = Collections.singletonList(CalendarScopes.CALENDAR);\r\n    private static final String CREDENTIALS_FILE_PATH = \"/credentials.json\";\r\n\r\n    /**\r\n     * Creates an authorized Credential object.\r\n     * @param HTTP_TRANSPORT The network HTTP Transport.\r\n     * @return An authorized Credential object.\r\n     * @throws IOException If the credentials.json file cannot be found.\r\n     */\r\n    private static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT) throws IOException {\r\n        // Load client secrets.\r\n        InputStream in = CalendarQuickstart.class.getResourceAsStream(CREDENTIALS_FILE_PATH);\r\n        if (in == null) {\r\n            throw new FileNotFoundException(\"Resource not found: \" + CREDENTIALS_FILE_PATH);\r\n        }\r\n        GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));\r\n        // Build flow and trigger user authorization request.\r\n        GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(\r\n                HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, SCOPES)\r\n                .setDataStoreFactory(new FileDataStoreFactory(new java.io.File(TOKENS_DIRECTORY_PATH)))\r\n                .setAccessType(\"offline\")\r\n                .build();\r\n        GoogleAuthorizationCodeRequestUrl url = new GoogleAuthorizationCodeRequestUrl(\r\n                flow.getAuthorizationServerEncodedUrl(),\r\n                flow.getClientId(),\r\n                \"http://127.0.0.1:8000\",\r\n                flow.getScopes())\r\n                .setAccessType(flow.getAccessType())\r\n                .setApprovalPrompt(flow.getApprovalPrompt());\r\n        url.toString();\r\n        LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();\r\n        return new AuthorizationCodeInstalledApp(flow, receiver).authorize(\"user\");\r\n    }\r\n\r\n    public static void main(String... args) throws IOException, GeneralSecurityException {\r\n        // Build a new authorized API client service.\r\n        final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();\r\n        Calendar service = new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))\r\n                .setApplicationName(APPLICATION_NAME)\r\n                .build();\r\n\r\n        // List the next 10 events from the primary calendar.\r\n        DateTime now = new DateTime(System.currentTimeMillis());\r\n        Events events = service.events().list(\"primary\")\r\n                .setMaxResults(10)\r\n                .setTimeMin(now)\r\n                .setOrderBy(\"startTime\")\r\n                .setSingleEvents(true)\r\n                .execute();\r\n        List<Event> items = events.getItems();\r\n        if (items.isEmpty()) {\r\n            System.out.println(\"No upcoming events found.\");\r\n        } else {\r\n            System.out.println(\"Upcoming events\");\r\n            for (Event event : items) {\r\n                DateTime start = event.getStart().getDateTime();\r\n                if (start == null) {\r\n                    start = event.getStart().getDate();\r\n                }\r\n                System.out.printf(\"%s (%s)\\n\", event.getSummary(), start);\r\n            }\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- complete/src/main/java/com/schedule/CalendarQuickstart.java	(revision 30c9d987028954f64b37b3e3869c02f1941b2b90)
++++ complete/src/main/java/com/schedule/CalendarQuickstart.java	(date 1602609019254)
+@@ -68,7 +68,7 @@
+         return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
+     }
+ 
+-    public static void main(String... args) throws IOException, GeneralSecurityException {
++    public static void authorization() throws IOException, GeneralSecurityException {
+         // Build a new authorized API client service.
+         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
+         Calendar service = new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
+@@ -97,4 +97,5 @@
+             }
+         }
+     }
++
+ }
+\ No newline at end of file
+Index: complete/src/main/java/com/schedule/web/HTMLController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.schedule.web;\r\n\r\nimport org.springframework.stereotype.Controller;\r\nimport org.springframework.ui.Model;\r\nimport org.springframework.web.bind.annotation.*;\r\n\r\n\r\n@Controller\r\npublic class HTMLController {\r\n\r\n    @GetMapping(\"/greeting\")\r\n    public String greeting(@RequestParam(name = \"name\", required = false, defaultValue = \"World\") String name, Model model) {\r\n        model.addAttribute(\"name\", name);\r\n        return \"greeting\";\r\n    }\r\n\r\n    @GetMapping(\"/login\")\r\n    public String login() {\r\n\r\n        return \"login\";\r\n    }\r\n    @GetMapping(\"/register\")\r\n    public String register() {\r\n\r\n        return \"register\";\r\n    }\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- complete/src/main/java/com/schedule/web/HTMLController.java	(revision 30c9d987028954f64b37b3e3869c02f1941b2b90)
++++ complete/src/main/java/com/schedule/web/HTMLController.java	(date 1602605750119)
+@@ -1,16 +1,22 @@
+ package com.schedule.web;
+ 
++import com.schedule.CalendarQuickstart;
+ import org.springframework.stereotype.Controller;
+ import org.springframework.ui.Model;
+ import org.springframework.web.bind.annotation.*;
+ 
++import java.io.IOException;
++import java.security.GeneralSecurityException;
++
+ 
+ @Controller
+ public class HTMLController {
+ 
+     @GetMapping("/greeting")
+-    public String greeting(@RequestParam(name = "name", required = false, defaultValue = "World") String name, Model model) {
++    public String greeting(@RequestParam(name = "name", required = false, defaultValue = "World") String name, Model model) throws IOException, GeneralSecurityException {
+         model.addAttribute("name", name);
++        CalendarQuickstart a = new CalendarQuickstart();
++        a.authorization();
+         return "greeting";
+     }
+ 
+Index: .idea/encodings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"Encoding\">\r\n    <file url=\"file://$PROJECT_DIR$/complete/src/main/java\" charset=\"UTF-8\" />\r\n    <file url=\"file://$PROJECT_DIR$/complete/src/main/resources\" charset=\"UTF-8\" />\r\n    <file url=\"file://$PROJECT_DIR$/initial/src/main/java\" charset=\"UTF-8\" />\r\n    <file url=\"file://$PROJECT_DIR$/initial/src/main/resources\" charset=\"UTF-8\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/encodings.xml	(revision 30c9d987028954f64b37b3e3869c02f1941b2b90)
++++ .idea/encodings.xml	(date 1602606684755)
+@@ -5,5 +5,6 @@
+     <file url="file://$PROJECT_DIR$/complete/src/main/resources" charset="UTF-8" />
+     <file url="file://$PROJECT_DIR$/initial/src/main/java" charset="UTF-8" />
+     <file url="file://$PROJECT_DIR$/initial/src/main/resources" charset="UTF-8" />
++    <file url="file://$PROJECT_DIR$/tokens/StoredCredential" charset="windows-1251" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: complete/build/tmp/compileJava/source-classes-mapping.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>com/schedule/system/AuthPerson.java\r\n com.schedule.system.AuthPerson\r\ncom/schedule/web/RequestController.java\r\n com.schedule.web.RequestApi\r\n com.schedule.web.RequestController\r\n com.schedule.web.StateLogin\r\ncom/schedule/web/HTMLController.java\r\n com.schedule.web.HTMLController\r\ncom/schedule/system/NumberWeak.java\r\n com.schedule.system.NumberWeak\r\ncom/schedule/system/DatabaseConnection.java\r\n com.schedule.system.DatabaseConnection\r\ncom/schedule/system/HTTPConnection.java\r\n com.schedule.system.HTTPConnection\r\ncom/schedule/system/ScheduleConnectionStudent.java\r\n com.schedule.system.DivisionList\r\n com.schedule.system.GroupList\r\n com.schedule.system.KurList\r\n com.schedule.system.ScheduleConnectionStudent\r\n com.schedule.system.ScheduleConnectionStudent$1\r\n com.schedule.system.ScheduleConnectionStudent$2\r\n com.schedule.system.ScheduleConnectionStudent$3\r\n com.schedule.system.ScheduleConnectionStudent$4\r\n com.schedule.system.ScheduleConnectionStudent$5\r\n com.schedule.system.ScheduleList\r\n com.schedule.system.TmpNumberWeak\r\ncom/schedule/CalendarQuickstart.java\r\n com.schedule.CalendarQuickstart\r\ncom/schedule/web/ServingWebContentApplication.java\r\n com.schedule.web.ServingWebContentApplication\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- complete/build/tmp/compileJava/source-classes-mapping.txt	(revision 30c9d987028954f64b37b3e3869c02f1941b2b90)
++++ complete/build/tmp/compileJava/source-classes-mapping.txt	(date 1602688432320)
+@@ -4,14 +4,12 @@
+  com.schedule.web.RequestApi
+  com.schedule.web.RequestController
+  com.schedule.web.StateLogin
+-com/schedule/web/HTMLController.java
+- com.schedule.web.HTMLController
++com/schedule/system/HTTPConnection.java
++ com.schedule.system.HTTPConnection
+ com/schedule/system/NumberWeak.java
+  com.schedule.system.NumberWeak
+ com/schedule/system/DatabaseConnection.java
+  com.schedule.system.DatabaseConnection
+-com/schedule/system/HTTPConnection.java
+- com.schedule.system.HTTPConnection
+ com/schedule/system/ScheduleConnectionStudent.java
+  com.schedule.system.DivisionList
+  com.schedule.system.GroupList
+@@ -24,7 +22,11 @@
+  com.schedule.system.ScheduleConnectionStudent$5
+  com.schedule.system.ScheduleList
+  com.schedule.system.TmpNumberWeak
+-com/schedule/CalendarQuickstart.java
+- com.schedule.CalendarQuickstart
+ com/schedule/web/ServingWebContentApplication.java
+  com.schedule.web.ServingWebContentApplication
++com/schedule/web/HTMLController.java
++ com.schedule.web.HTMLController
++com/schedule/CalendarQuickstart.java
++ com.schedule.CalendarQuickstart
++com/schedule/google/CalendarAPI.java
++ com.schedule.google.CalendarAPI
+Index: complete/src/main/java/com/schedule/google/CalendarAPI.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- complete/src/main/java/com/schedule/google/CalendarAPI.java	(date 1602688810078)
++++ complete/src/main/java/com/schedule/google/CalendarAPI.java	(date 1602688810078)
+@@ -0,0 +1,149 @@
++package com.schedule.google;
++
++import com.google.api.client.auth.oauth2.Credential;
++import com.google.api.client.googleapis.auth.oauth2.*;
++import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
++import com.google.api.client.http.HttpExecuteInterceptor;
++import com.google.api.client.http.javanet.NetHttpTransport;
++import com.google.api.client.json.JsonFactory;
++import com.google.api.client.json.jackson2.JacksonFactory;
++import com.google.api.client.util.DateTime;
++import com.google.api.services.calendar.Calendar;
++import com.google.api.services.calendar.CalendarRequestInitializer;
++import com.google.api.services.calendar.CalendarScopes;
++import com.google.api.services.calendar.model.Event;
++import com.google.api.services.calendar.model.EventAttendee;
++import com.google.api.services.calendar.model.EventDateTime;
++import com.google.api.services.calendar.model.EventReminder;
++import sun.reflect.generics.scope.Scope;
++
++import java.io.*;
++import java.security.GeneralSecurityException;
++import java.util.Arrays;
++import java.util.Collections;
++import java.util.List;
++
++public class CalendarAPI {
++    private static final List<String> SCOPES = Collections.singletonList(CalendarScopes.CALENDAR);
++    private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
++    private static final String APPLICATION_NAME = "CalendarAPI";
++    private static NetHttpTransport HTTP_TRANSPORT;
++    private static String REDIRECT_URL;
++
++    private static GoogleClientSecrets clientSecret;
++    private static GoogleAuthorizationCodeFlow flow;
++    private static Credential credential;
++    private static Calendar service;
++
++    private static String accessToken = null;
++
++    public CalendarAPI(String clientSecretFilePath, String redirectURL) throws IOException, GeneralSecurityException {
++        HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
++        clientSecret = getClientSecretFromFile(clientSecretFilePath);
++        flow = getFlow(clientSecret);
++        REDIRECT_URL = redirectURL;
++    }
++
++    public CalendarAPI(String redirectURL) throws IOException, GeneralSecurityException {
++        HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
++        clientSecret = getClientSecretFromFile("/credentials.json");
++        flow = getFlow(clientSecret);
++        REDIRECT_URL = redirectURL;
++    }
++
++    public CalendarAPI() throws IOException, GeneralSecurityException {
++        HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
++        clientSecret = getClientSecretFromFile("/credentials.json");
++        flow = getFlow(clientSecret);
++        REDIRECT_URL = "http://127.0.0.1:8080";
++    }
++
++    private static GoogleClientSecrets getClientSecretFromFile(String clientSecretFilePath) throws IOException {
++        InputStream in = CalendarAPI.class.getResourceAsStream(clientSecretFilePath);
++        if (in == null) {
++            throw new FileNotFoundException("Resource not found: " + clientSecretFilePath);
++        }
++        return GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
++    }
++
++    private static GoogleAuthorizationCodeFlow getFlow(GoogleClientSecrets clientSecrets) {
++        return new GoogleAuthorizationCodeFlow.Builder(
++                HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, SCOPES)
++                .setAccessType("offline")
++                .build();
++    }
++
++    public static String getAuthUrl() {
++        GoogleAuthorizationCodeRequestUrl url = new GoogleAuthorizationCodeRequestUrl(
++                flow.getAuthorizationServerEncodedUrl(),
++                flow.getClientId(),
++                REDIRECT_URL,
++                flow.getScopes())
++                .setAccessType(flow.getAccessType())
++                .setApprovalPrompt(flow.getApprovalPrompt());
++        return url.toString();
++    }
++
++    public static void createService(String code) throws IOException {
++        GoogleTokenResponse response = flow.newTokenRequest(code).setRedirectUri(REDIRECT_URL)
++                .execute();
++        credential = new GoogleCredential.Builder()
++                .setTransport(HTTP_TRANSPORT)
++                .setJsonFactory(JSON_FACTORY)
++                .setClientSecrets(flow.getClientId(), clientSecret.getDetails().getClientSecret())
++                .build().setFromTokenResponse(response);
++        service = new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential)
++                .setApplicationName(APPLICATION_NAME).build();
++        accessToken = credential.getAccessToken();
++    }
++
++    public static String getAccessToken() {
++        return accessToken;
++    }
++
++    public static void createEvent(String summary, String location, String description, DateTime startEvent, DateTime endEvent) throws IOException {
++        Event event = new Event()
++                .setSummary(summary)
++                .setLocation(location)
++                .setDescription(description);
++
++        EventDateTime start = new EventDateTime()
++                .setDateTime(startEvent);
++        event.setStart(start);
++
++        EventDateTime end = new EventDateTime()
++                .setDateTime(endEvent);
++        event.setEnd(end);
++
++        EventReminder[] reminderOverrides = new EventReminder[]{
++                new EventReminder().setMethod("email").setMinutes(1 * 60),
++                new EventReminder().setMethod("popup").setMinutes(15),
++        };
++        Event.Reminders reminders = new Event.Reminders()
++                .setUseDefault(false)
++                .setOverrides(Arrays.asList(reminderOverrides));
++        event.setReminders(reminders);
++
++        service.events().insert("primary", event).execute();
++    }
++
++    public static void main(String... args) throws IOException, GeneralSecurityException {
++        CalendarAPI test = new CalendarAPI("/credentials.json", "http://127.0.0.1:8000");
++//        System.out.println(test.getAuthUrl());
++
++        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
++        System.out.println("code");
++        String code = in.readLine();
++        test.createService(code);
++
++        test.createEvent(
++                "Разработка платформенных и кросплатформенных киберфизических систем",
++                "Наугорское ш., 29, Орёл, Орловская обл., 302020",
++                "Кибернетические и киберфизические системы (лаб)\\nКорпус 11, аудитория 227\\nВетров А.С. http://oreluniver.ru/employee/7251\\n(создано при промощи приложения)",
++                new DateTime("2020-10-14T15:30:00-00:00"),
++                new DateTime("2020-10-14T17:10:00-00:00")
++        );
++
++        System.out.println(test.getAccessToken());
++    }
++}
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"BranchesTreeState\">\r\n    <expand>\r\n      <path>\r\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"LOCAL_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n      </path>\r\n      <path>\r\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"REMOTE_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n      </path>\r\n      <path>\r\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"REMOTE_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"GROUP_NODE:origin\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n      </path>\r\n    </expand>\r\n    <select />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"b8959205-b303-4dcc-9433-c3d711db312c\" name=\"Default Changelist\" comment=\"init\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ExternalProjectsData\">\r\n    <projectState path=\"$PROJECT_DIR$/complete\">\r\n      <ProjectState />\r\n    </projectState>\r\n    <projectState path=\"$PROJECT_DIR$/initial\">\r\n      <ProjectState />\r\n    </projectState>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"master\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MavenImportPreferences\">\r\n    <option name=\"generalSettings\">\r\n      <MavenGeneralSettings>\r\n        <option name=\"mavenHome\" value=\"C:\\IntelliJ IDEA 2020.2.3\\plugins\\maven\\lib\\maven3\" />\r\n      </MavenGeneralSettings>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"1imjrdBdMePQVulVRyxMzQlbUj8\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"RequestMappingsPanelOrder0\" value=\"0\" />\r\n    <property name=\"RequestMappingsPanelOrder1\" value=\"1\" />\r\n    <property name=\"RequestMappingsPanelWidth0\" value=\"75\" />\r\n    <property name=\"RequestMappingsPanelWidth1\" value=\"75\" />\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\r\n    <property name=\"aspect.path.notification.shown\" value=\"true\" />\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$/complete/src/main/resources\" />\r\n  </component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\test\\complete\\src\\main\\resources\" />\r\n      <recent name=\"C:\\test\\complete\\src\\main\" />\r\n      <recent name=\"C:\\test\\complete\\src\\main\\java\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Spring Boot.ServingWebContentApplication (2)\">\r\n    <configuration name=\"complete [dependencies]\" type=\"GradleRunConfiguration\" factoryName=\"Gradle\" temporary=\"true\">\r\n      <ExternalSystemSettings>\r\n        <option name=\"executionName\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$/complete\" />\r\n        <option name=\"externalSystemIdString\" value=\"GRADLE\" />\r\n        <option name=\"scriptParameters\" />\r\n        <option name=\"taskDescriptions\">\r\n          <list />\r\n        </option>\r\n        <option name=\"taskNames\">\r\n          <list>\r\n            <option value=\"dependencies\" />\r\n          </list>\r\n        </option>\r\n        <option name=\"vmOptions\" />\r\n      </ExternalSystemSettings>\r\n      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"ServingWebContentApplication (1)\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"serving-web-content.main\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"schedule.web.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"schedule.web.ServingWebContentApplication\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"ServingWebContentApplication (2)\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"serving-web-content.main\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.schedule.web.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"com.schedule.web.ServingWebContentApplication\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"ServingWebContentApplication\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\">\r\n      <module name=\"serving-web-content.main\" />\r\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"com.example.servingwebcontent.ServingWebContentApplication\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Spring Boot.ServingWebContentApplication (2)\" />\r\n        <item itemvalue=\"Spring Boot.ServingWebContentApplication (1)\" />\r\n        <item itemvalue=\"Gradle.complete [dependencies]\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"b8959205-b303-4dcc-9433-c3d711db312c\" name=\"Default Changelist\" comment=\"\" />\r\n      <created>1602519861048</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1602519861048</updated>\r\n      <workItem from=\"1602519862648\" duration=\"585000\" />\r\n      <workItem from=\"1602520590575\" duration=\"1885000\" />\r\n      <workItem from=\"1602522497505\" duration=\"28000\" />\r\n      <workItem from=\"1602522557963\" duration=\"6000\" />\r\n      <workItem from=\"1602523239772\" duration=\"812000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"init\">\r\n      <created>1602523561594</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1602523561594</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"2\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"init\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"init\" />\r\n  </component>\r\n  <component name=\"WindowStateProjectService\">\r\n    <state width=\"1493\" height=\"347\" key=\"GridCell.Tab.0.bottom\" timestamp=\"1602524052178\">\r\n      <screen x=\"0\" y=\"0\" width=\"1536\" height=\"824\" />\r\n    </state>\r\n    <state width=\"1493\" height=\"347\" key=\"GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824\" timestamp=\"1602524052178\" />\r\n    <state width=\"1493\" height=\"347\" key=\"GridCell.Tab.0.center\" timestamp=\"1602524052178\">\r\n      <screen x=\"0\" y=\"0\" width=\"1536\" height=\"824\" />\r\n    </state>\r\n    <state width=\"1493\" height=\"347\" key=\"GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824\" timestamp=\"1602524052178\" />\r\n    <state width=\"1493\" height=\"347\" key=\"GridCell.Tab.0.left\" timestamp=\"1602524052177\">\r\n      <screen x=\"0\" y=\"0\" width=\"1536\" height=\"824\" />\r\n    </state>\r\n    <state width=\"1493\" height=\"347\" key=\"GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824\" timestamp=\"1602524052177\" />\r\n    <state width=\"1493\" height=\"347\" key=\"GridCell.Tab.0.right\" timestamp=\"1602524052178\">\r\n      <screen x=\"0\" y=\"0\" width=\"1536\" height=\"824\" />\r\n    </state>\r\n    <state width=\"1493\" height=\"347\" key=\"GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824\" timestamp=\"1602524052178\" />\r\n    <state width=\"1493\" height=\"347\" key=\"GridCell.Tab.1.bottom\" timestamp=\"1602524052178\">\r\n      <screen x=\"0\" y=\"0\" width=\"1536\" height=\"824\" />\r\n    </state>\r\n    <state width=\"1493\" height=\"347\" key=\"GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824\" timestamp=\"1602524052178\" />\r\n    <state width=\"1493\" height=\"347\" key=\"GridCell.Tab.1.center\" timestamp=\"1602524052178\">\r\n      <screen x=\"0\" y=\"0\" width=\"1536\" height=\"824\" />\r\n    </state>\r\n    <state width=\"1493\" height=\"347\" key=\"GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824\" timestamp=\"1602524052178\" />\r\n    <state width=\"1493\" height=\"347\" key=\"GridCell.Tab.1.left\" timestamp=\"1602524052178\">\r\n      <screen x=\"0\" y=\"0\" width=\"1536\" height=\"824\" />\r\n    </state>\r\n    <state width=\"1493\" height=\"347\" key=\"GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824\" timestamp=\"1602524052178\" />\r\n    <state width=\"1493\" height=\"347\" key=\"GridCell.Tab.1.right\" timestamp=\"1602524052178\">\r\n      <screen x=\"0\" y=\"0\" width=\"1536\" height=\"824\" />\r\n    </state>\r\n    <state width=\"1493\" height=\"347\" key=\"GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824\" timestamp=\"1602524052178\" />\r\n    <state x=\"361\" y=\"145\" key=\"Vcs.Push.Dialog.v2\" timestamp=\"1602523566840\">\r\n      <screen x=\"0\" y=\"0\" width=\"1536\" height=\"824\" />\r\n    </state>\r\n    <state x=\"361\" y=\"145\" key=\"Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824\" timestamp=\"1602523566840\" />\r\n    <state x=\"586\" y=\"326\" key=\"com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2\" timestamp=\"1602522151831\">\r\n      <screen x=\"0\" y=\"0\" width=\"1536\" height=\"824\" />\r\n    </state>\r\n    <state x=\"586\" y=\"326\" key=\"com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824\" timestamp=\"1602522151831\" />\r\n    <state x=\"209\" y=\"32\" key=\"new project wizard\" timestamp=\"1602520430609\">\r\n      <screen x=\"0\" y=\"0\" width=\"1536\" height=\"824\" />\r\n    </state>\r\n    <state x=\"209\" y=\"32\" key=\"new project wizard/0.0.1536.824@0.0.1536.824\" timestamp=\"1602520430609\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\r\n          <url>file://$PROJECT_DIR$/complete/src/main/java/schedule/web/ServingWebContentApplication.java</url>\r\n          <line>9</line>\r\n          <option name=\"timeStamp\" value=\"1\" />\r\n        </line-breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/workspace.xml	(revision 30c9d987028954f64b37b3e3869c02f1941b2b90)
++++ .idea/workspace.xml	(date 1602688810124)
+@@ -22,7 +22,31 @@
+     <select />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="b8959205-b303-4dcc-9433-c3d711db312c" name="Default Changelist" comment="init" />
++    <list default="true" id="b8959205-b303-4dcc-9433-c3d711db312c" name="Default Changelist" comment="init">
++      <change afterPath="$PROJECT_DIR$/complete/src/main/java/com/schedule/google/CalendarAPI.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/complete/src/main/resources/credentials.json" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/complete/.gradle/6.5.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/complete/.gradle/6.5.1/executionHistory/executionHistory.bin" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/complete/.gradle/6.5.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/complete/.gradle/6.5.1/executionHistory/executionHistory.lock" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/complete/.gradle/6.5.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/complete/.gradle/6.5.1/fileHashes/fileHashes.bin" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/complete/.gradle/6.5.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/complete/.gradle/6.5.1/fileHashes/fileHashes.lock" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/complete/.gradle/6.5.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/complete/.gradle/6.5.1/javaCompile/classAnalysis.bin" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/complete/.gradle/6.5.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/complete/.gradle/6.5.1/javaCompile/javaCompile.lock" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/complete/.gradle/6.5.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/complete/.gradle/6.5.1/javaCompile/taskHistory.bin" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/complete/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/complete/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/complete/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/complete/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/complete/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/complete/.gradle/checksums/checksums.lock" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/complete/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/complete/.gradle/checksums/md5-checksums.bin" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/complete/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/complete/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/complete/build/classes/java/main/com/schedule/CalendarQuickstart.class" beforeDir="false" afterPath="$PROJECT_DIR$/complete/build/classes/java/main/com/schedule/CalendarQuickstart.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/complete/build/classes/java/main/com/schedule/web/HTMLController.class" beforeDir="false" afterPath="$PROJECT_DIR$/complete/build/classes/java/main/com/schedule/web/HTMLController.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/complete/build/classes/java/main/com/schedule/web/ServingWebContentApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/complete/build/classes/java/main/com/schedule/web/ServingWebContentApplication.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/complete/build/tmp/compileJava/source-classes-mapping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/complete/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/complete/src/main/java/com/schedule/CalendarQuickstart.java" beforeDir="false" afterPath="$PROJECT_DIR$/complete/src/main/java/com/schedule/CalendarQuickstart.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/complete/src/main/java/com/schedule/web/HTMLController.java" beforeDir="false" afterPath="$PROJECT_DIR$/complete/src/main/java/com/schedule/web/HTMLController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/complete/src/main/java/com/schedule/web/ServingWebContentApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/complete/src/main/java/com/schedule/web/ServingWebContentApplication.java" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -35,6 +59,13 @@
+     <projectState path="$PROJECT_DIR$/initial">
+       <ProjectState />
+     </projectState>
++  </component>
++  <component name="FileTemplateManagerImpl">
++    <option name="RECENT_TEMPLATES">
++      <list>
++        <option value="Class" />
++      </list>
++    </option>
+   </component>
+   <component name="Git.Settings">
+     <option name="RECENT_BRANCH_BY_REPOSITORY">
+@@ -64,16 +95,55 @@
+     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+     <property name="WebServerToolWindowFactoryState" value="false" />
+     <property name="aspect.path.notification.shown" value="true" />
+-    <property name="last_opened_file_path" value="$PROJECT_DIR$/complete/src/main/resources" />
++    <property name="last_opened_file_path" value="$PROJECT_DIR$/complete/src/main/java/com/schedule/google" />
+   </component>
+   <component name="RecentsManager">
+     <key name="CopyFile.RECENT_KEYS">
++      <recent name="C:\Schedule3.0\complete\src\main\java\com\schedule\google" />
++      <recent name="C:\Schedule3.0\complete\src\main\resources" />
+       <recent name="C:\test\complete\src\main\resources" />
+       <recent name="C:\test\complete\src\main" />
+       <recent name="C:\test\complete\src\main\java" />
+     </key>
+   </component>
+-  <component name="RunManager" selected="Spring Boot.ServingWebContentApplication (2)">
++  <component name="RunManager" selected="Application.CalendarAPI">
++    <configuration name="CalendarAPI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="com.schedule.google.CalendarAPI" />
++      <module name="serving-web-content.main" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="com.schedule.google.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="CalendarQuickstart" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="com.schedule.CalendarQuickstart" />
++      <module name="serving-web-content.main" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="com.schedule.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
++      <option name="arquillianRunConfiguration">
++        <value>
++          <option name="containerStateName" value="" />
++        </value>
++      </option>
++      <option name="TEST_OBJECT" value="class" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
+     <configuration name="complete [dependencies]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+       <ExternalSystemSettings>
+         <option name="executionName" />
+@@ -128,7 +198,9 @@
+     </configuration>
+     <recent_temporary>
+       <list>
++        <item itemvalue="Application.CalendarAPI" />
+         <item itemvalue="Spring Boot.ServingWebContentApplication (2)" />
++        <item itemvalue="Application.CalendarQuickstart" />
+         <item itemvalue="Spring Boot.ServingWebContentApplication (1)" />
+         <item itemvalue="Gradle.complete [dependencies]" />
+       </list>
+@@ -147,6 +219,9 @@
+       <workItem from="1602522497505" duration="28000" />
+       <workItem from="1602522557963" duration="6000" />
+       <workItem from="1602523239772" duration="812000" />
++      <workItem from="1602600604738" duration="3385000" />
++      <workItem from="1602606166686" duration="5112000" />
++      <workItem from="1602687539871" duration="1270000" />
+     </task>
+     <task id="LOCAL-00001" summary="init">
+       <created>1602523561594</created>
+@@ -178,46 +253,62 @@
+     <option name="LAST_COMMIT_MESSAGE" value="init" />
+   </component>
+   <component name="WindowStateProjectService">
+-    <state width="1493" height="347" key="GridCell.Tab.0.bottom" timestamp="1602524052178">
++    <state width="746" height="278" key="GridCell.Tab.0.bottom" timestamp="1602688431157">
++      <screen x="0" y="0" width="1536" height="824" />
++    </state>
++    <state width="746" height="278" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1602688431157" />
++    <state width="746" height="278" key="GridCell.Tab.0.center" timestamp="1602688431156">
++      <screen x="0" y="0" width="1536" height="824" />
++    </state>
++    <state width="746" height="278" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1602688431156" />
++    <state width="746" height="278" key="GridCell.Tab.0.left" timestamp="1602688431156">
+       <screen x="0" y="0" width="1536" height="824" />
+     </state>
+-    <state width="1493" height="347" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1602524052178" />
+-    <state width="1493" height="347" key="GridCell.Tab.0.center" timestamp="1602524052178">
++    <state width="746" height="278" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1602688431156" />
++    <state width="746" height="278" key="GridCell.Tab.0.right" timestamp="1602688431156">
+       <screen x="0" y="0" width="1536" height="824" />
+     </state>
+-    <state width="1493" height="347" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1602524052178" />
+-    <state width="1493" height="347" key="GridCell.Tab.0.left" timestamp="1602524052177">
++    <state width="746" height="278" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1602688431156" />
++    <state width="746" height="261" key="GridCell.Tab.1.bottom" timestamp="1602610433685">
+       <screen x="0" y="0" width="1536" height="824" />
+     </state>
+-    <state width="1493" height="347" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1602524052177" />
+-    <state width="1493" height="347" key="GridCell.Tab.0.right" timestamp="1602524052178">
++    <state width="746" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1602610433685" />
++    <state width="746" height="261" key="GridCell.Tab.1.center" timestamp="1602610433685">
+       <screen x="0" y="0" width="1536" height="824" />
+     </state>
+-    <state width="1493" height="347" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1602524052178" />
+-    <state width="1493" height="347" key="GridCell.Tab.1.bottom" timestamp="1602524052178">
++    <state width="746" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1602610433685" />
++    <state width="746" height="261" key="GridCell.Tab.1.left" timestamp="1602610433685">
+       <screen x="0" y="0" width="1536" height="824" />
+     </state>
+-    <state width="1493" height="347" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1602524052178" />
+-    <state width="1493" height="347" key="GridCell.Tab.1.center" timestamp="1602524052178">
++    <state width="746" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1602610433685" />
++    <state width="746" height="261" key="GridCell.Tab.1.right" timestamp="1602610433685">
+       <screen x="0" y="0" width="1536" height="824" />
+     </state>
+-    <state width="1493" height="347" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1602524052178" />
+-    <state width="1493" height="347" key="GridCell.Tab.1.left" timestamp="1602524052178">
++    <state width="746" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1602610433685" />
++    <state width="746" height="261" key="GridCell.Tab.2.bottom" timestamp="1602605990853">
+       <screen x="0" y="0" width="1536" height="824" />
+     </state>
+-    <state width="1493" height="347" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1602524052178" />
+-    <state width="1493" height="347" key="GridCell.Tab.1.right" timestamp="1602524052178">
++    <state width="746" height="261" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1602605990853" />
++    <state width="746" height="261" key="GridCell.Tab.2.center" timestamp="1602605990853">
+       <screen x="0" y="0" width="1536" height="824" />
+     </state>
+-    <state width="1493" height="347" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1602524052178" />
++    <state width="746" height="261" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1602605990853" />
++    <state width="746" height="261" key="GridCell.Tab.2.left" timestamp="1602605990853">
++      <screen x="0" y="0" width="1536" height="824" />
++    </state>
++    <state width="746" height="261" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1602605990853" />
++    <state width="746" height="261" key="GridCell.Tab.2.right" timestamp="1602605990853">
++      <screen x="0" y="0" width="1536" height="824" />
++    </state>
++    <state width="746" height="261" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1602605990853" />
+     <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1602523566840">
+       <screen x="0" y="0" width="1536" height="824" />
+     </state>
+     <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1602523566840" />
+-    <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1602522151831">
++    <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1602688810066">
+       <screen x="0" y="0" width="1536" height="824" />
+     </state>
+-    <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1602522151831" />
++    <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1602688810066" />
+     <state x="209" y="32" key="new project wizard" timestamp="1602520430609">
+       <screen x="0" y="0" width="1536" height="824" />
+     </state>
+Index: complete/src/main/resources/credentials.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- complete/src/main/resources/credentials.json	(date 1602322644866)
++++ complete/src/main/resources/credentials.json	(date 1602322644866)
+@@ -0,0 +1,1 @@
++{"installed":{"client_id":"209643789133-tedk6tmssr1rchqdujvk04sshb8a89lm.apps.googleusercontent.com","project_id":"test-1-292109","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://oauth2.googleapis.com/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":"7UoK-SPA113xH3B-l2bmxFyD","redirect_uris":["urn:ietf:wg:oauth:2.0:oob","http://localhost"]}}
+\ No newline at end of file
