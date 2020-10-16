@@ -6,6 +6,7 @@ import com.schedule.system.oreluniver.DivisionList;
 import com.schedule.system.oreluniver.GroupList;
 import com.schedule.system.oreluniver.ScheduleList;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,11 +52,10 @@ public class DatabaseConnection {
 
         stmt = c.createStatement();
         ResultSet rs = stmt.executeQuery(
-                "select a.id_group , s.title_subject, s.type_lesson, s.id_corpus, s.date_lesson, " +
-                        "s.number_lesson, s.special, s.number_room " +
-                        "from list_person_group as a, auth_person as p, list_schedule as s " +
-                        "where p.id = "+id+" );");
-
+                "select a.id_group , s.title_subject, s.type_lesson, s.id_corpus, s.date_lesson,k.addres, " +
+                        "                        s.number_lesson, s.special, s.number_room,  n.t_start, n.t_stop " +
+                        "                        from list_person_group as a,  list_schedule as s, list_corpus as k, number_lesson_t as n " +
+                        "where a.id_person ="+id+" and s.id_group = a.id_group and k.id= s.id_corpus and n.less=s.number_lesson; ");
         while (rs.next()) {
             GoogleSchedule schedule = new GoogleSchedule();
             schedule.setId_group(rs.getInt("id_group"));
@@ -66,11 +66,16 @@ public class DatabaseConnection {
             schedule.setNumber_lesson(rs.getInt("number_lesson"));
             schedule.setSpecial(rs.getString("special"));
             schedule.setNumber_room(rs.getString("number_room"));
+            schedule.setT_start(rs.getString("t_start"));
+            schedule.setT_stop(rs.getString("t_stop"));
+            schedule.setAdress(rs.getString("addres"));
+
             googleSchedules.add(schedule);
         }
         rs.close();
         stmt.close();
         c.commit();
+        System.out.println(googleSchedules.size()+"sql");
         return googleSchedules;
     }
     public List<People> getPeople() throws SQLException {
@@ -104,18 +109,30 @@ public class DatabaseConnection {
 
 
 
-    public void setSchedule(List<ScheduleList> scheduleList) throws SQLException {
+    public void setSchedule(List<ScheduleList> scheduleList) throws SQLException, UnsupportedEncodingException {
         stmt = c.createStatement();
+        System.out.println(scheduleList.get(0).getTitle());
         sql = "INSERT INTO list_schedule (id, number_sub_gruop, title_subject, type_lesson," +
                 " number_lesson, day_week, date_lesson, special, link, pass," +
                 " zoom_link, zoom_password, id_corpus, id_employee, id_group, number_room) VALUES ";
         for (int i = 0; i < scheduleList.size(); i++) {
             sql += String.format("(%s, %s, '%s', '%s', %s, %s,'%s','%s','%s','%s','%s', '%s', %s, %s, %s, '%s'),",
-                    scheduleList.get(i).getId_cell(), scheduleList.get(i).getNumberSubGruop(), scheduleList.get(i).getTitleSubject(),
-                    scheduleList.get(i).getTypeLesson(), scheduleList.get(i).getNumberLesson(), scheduleList.get(i).getDayWeek(),
-                    scheduleList.get(i).getDateLesson(), scheduleList.get(i).getSpecial(), scheduleList.get(i).getLink(),
-                    scheduleList.get(i).getPass(), scheduleList.get(i).getZoom_link(), scheduleList.get(i).getZoom_password(),
-                    scheduleList.get(i).getKorpus(), scheduleList.get(i).getEmployee_id(), scheduleList.get(i).getIdGruop(), scheduleList.get(i).getNumberRoom());
+                    scheduleList.get(i).getId_cell(),
+                    scheduleList.get(i).getNumberSubGruop(),
+                    new String(scheduleList.get(i).getTitleSubject().getBytes(),"UTF-8"),
+                    new String(scheduleList.get(i).getTypeLesson().getBytes(),"UTF-8"),
+                    scheduleList.get(i).getNumberLesson(),
+                    scheduleList.get(i).getDayWeek(),
+                    new String(scheduleList.get(i).getDateLesson().getBytes(),"UTF-8"),
+                    new String(scheduleList.get(i).getSpecial().getBytes(),"UTF-8"),
+                    new String(scheduleList.get(i).getLink().getBytes(),"UTF-8"),
+                    new String(scheduleList.get(i).getPass().getBytes(),"UTF-8"),
+                    scheduleList.get(i).getZoom_link(),
+                    scheduleList.get(i).getZoom_password(),
+                    new String(scheduleList.get(i).getKorpus().getBytes(),"UTF-8"),
+                    scheduleList.get(i).getEmployee_id(),
+                    scheduleList.get(i).getIdGruop(),
+                    new String(scheduleList.get(i).getNumberRoom().getBytes(),"UTF-8"));
         }
         sql = sql.substring(0, sql.length() - 1) + " ON CONFLICT (id) DO UPDATE SET " +
                 "number_sub_gruop=EXCLUDED.number_sub_gruop, " +

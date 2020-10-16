@@ -253,34 +253,35 @@ public class CalendarAPI {
         DatabaseConnection databaseConnection = new DatabaseConnection();
         databaseConnection.connectionDB();
         List<People> peoples = databaseConnection.getPeople();
-
-        for (int i=0; i<peoples.size(); i++) {
+System.out.println(peoples.size());
+        for (int i = 0; i < peoples.size(); i++) {
             String accessObject = peoples.get(i).getGoogle_calendar_key();
             test.setAccessObjectJson(accessObject);
             test.createServiceFromAccessObject();
             List<Event> events = test.getEvents(
-                    100,
+                    250,
                     new DateTime("2020-10-12T00:30:00-00:00"),
                     new DateTime("2020-10-18T15:30:00-00:00")
             );
             test.deleteEvents(events);
             List<GoogleSchedule> googleSchedules = databaseConnection.getSchedule(peoples.get(i).getId_person());
-            for (int j=0;j<googleSchedules.size();j++){
+            System.out.println(googleSchedules.size());
+            for (int j = 0; j < googleSchedules.size(); j++) {
+                System.out.println(googleSchedules.get(j).getAdress());
                 test.createEvent(
-                    googleSchedules.get(j).getTitle_subject(),
-                    googleSchedules,
-                    "asdfghjk (CalendarAPI)",
-                    new DateTime("2020-10-14T15:30:00-00:00"),
-                    new DateTime("2020-10-14T17:10:00-00:00")
-            );
-
-
+                        googleSchedules.get(j).getTitle_subject(),
+                        googleSchedules.get(j).getAdress(),
+                        "Аудитория: "+googleSchedules.get(j).getNumber_room()+".  Создано приложением (CalendarAPI)",
+                        new DateTime(googleSchedules.get(j).getDate_lesson() + googleSchedules.get(j).getT_start()),
+                        new DateTime(googleSchedules.get(j).getDate_lesson() + googleSchedules.get(j).getT_stop())
+                );
+                test.updateAccessObject();
+                databaseConnection.setGoogleCalendarKey(peoples.get(i).getLogin_key(), test.getAccessObjectJson());
             }
-            updateAccessObject();
-            databaseConnection.setGoogleCalendarKey(peoples.get(i).getLogin_key(),getAccessObjectJson());
+
 
         }
-
+    }
 
 //        for (int i = 0; i<googleSchedules.size(); i ++){
 //            String accessObject = googleSchedules.get(i).getGoogle_calendar_key();
@@ -302,9 +303,9 @@ public class CalendarAPI {
 //                    new DateTime("2020-10-14T15:30:00-00:00"),
 //                    new DateTime("2020-10-14T17:10:00-00:00")
 //            );
-    }
 
-    public static void main(String... args) throws IOException, GeneralSecurityException {
+
+    public static void main(String[] args) throws IOException, GeneralSecurityException {
         CalendarAPI test = new CalendarAPI("/system/credentials.json", "http://127.0.0.1:8000");
         System.out.println(test.getAuthUrl());
 
