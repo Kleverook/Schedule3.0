@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:form="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <script src="scripts.js"></script>
+    <script src="register/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+<body>
+<h1>Регистрация</h1>
+<div>
+
+    <p><input type="text" id="login" onkeyup="check_login(this)" placeholder="Username"></p>
+    <p><input type="password" id="password" onkeyup="check_password(this)" placeholder="password"></p>
+    <p><input type="password" id="password_repeat" onkeyup="check_password_repeat(this)" placeholder="password"></p>
+    <p><input type="text" id="name" onkeyup="check_name(this)" placeholder="Имя"></p>
+    <p><input type="text" id="surname" onkeyup="check_surname(this)" placeholder="Фамилия"></p>
+
+    <output id="error_box"></output>
+    <p><input type="button" id="next" onclick="check_user()"></p>
+</div>
+
+
+</body>
+</html>

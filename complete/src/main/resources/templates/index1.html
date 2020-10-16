@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script src="scripts.js"></script>
+    <script src="index/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="index/style.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<a th:href="${auth_url}">Добавить Google календарь</a>
+<p th:text="${name} +' '+ ${surname}"/>
+<input type="button" id="exit" value="Exit" onclick="delete_cookie('login_key')">
+
+
+<input type="button" id="myBtn" value="Добавить групу" onclick="get_division()">
+
+
+<div id="myModal" class="modal">
+
+
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <h1>Добавление группы</h1>
+        </div>
+        <div id="modal" class="modal-body">
+            <div>
+
+                <p id="divisionStuds" onclick="divisionStuds()">Факультет/Институт</p>
+
+                <p id="divisionStudsNone" style="display:none" onclick="divisionStudsNone()">Факультет/Институт</p>
+
+                <div id="division_body" style="display:none">
+
+                </div>
+                <p id="kurs" onclick="kurs()">Курс</p>
+
+                <p id="kursNone" style="display:none" onclick="kursNone()">Курс</p>
+
+                <div id="kurs_body" style="display:none">
+
+                </div>
+                <p id="group" onclick="group()">Группа</p>
+
+                <p id="groupNone" style="display:none" onclick="groupNone()">Группа</p>
+
+                <div id="group_body" style="display:none">
+
+                </div>
+
+            </div>
+
+
+
+            <div class="modal-footer">
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+<table id="list_group">
+    <tr><th>Институт/Факультет</th><th>Курс</th><th>Группа</th><th>Направление подготовки</th><th>Уровень обучения</th></tr>
+    <tr><td value = "hgfdsdfghjk"></td></tr>
+</table>
+</body>
+</html>

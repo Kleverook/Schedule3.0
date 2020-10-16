@@ -1,52 +1,70 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="ru" xmlns:form="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title></title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="css/util.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
     <script src="scripts.js"></script>
     <script src="index/scripts.js"></script>
     <link rel="stylesheet" type="text/css" href="index/style.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <script src="https://use.fontawesome.com/f0f22ac100.js"></script>
+
+    <!--===============================================================================================-->
 </head>
 <body>
-<a th:href="${auth_url}">Добавить Google календарь</a>
-<p th:text="${name} +' '+ ${surname}"/>
-<input type="button" id="exit" value="Exit" onclick="delete_cookie('login_key')">
-
-
-<input type="button" id="myBtn" value="Добавить групу" onclick="get_division()">
-
 
 <div id="myModal" class="modal">
 
 
     <div class="modal-content">
         <div class="modal-header">
-            <span class="close">&times;</span>
+            <span class="close"></span>
             <h1>Добавление группы</h1>
         </div>
         <div id="modal" class="modal-body">
             <div>
 
-                <p id="divisionStuds" onclick="divisionStuds()">Факультет/Институт</p>
+                <p class="plus" id="divisionStuds" onclick="divisionStuds()">Факультет/Институт</p>
 
-                <p id="divisionStudsNone" style="display:none" onclick="divisionStudsNone()">Факультет/Институт</p>
+                <p class="plus" id="divisionStudsNone" style="display:none" onclick="divisionStudsNone()">Факультет/Институт</p>
 
-                <div id="division_body" style="display:none">
-
-                </div>
-                <p id="kurs" onclick="kurs()">Курс</p>
-
-                <p id="kursNone" style="display:none" onclick="kursNone()">Курс</p>
-
-                <div id="kurs_body" style="display:none">
+                <div class="modal_body" id="division_body" style="display:none">
 
                 </div>
-                <p id="group" onclick="group()">Группа</p>
+                <p class="plus" id="kurs" onclick="kurs()">Курс</p>
 
-                <p id="groupNone" style="display:none" onclick="groupNone()">Группа</p>
+                <p class="plus" id="kursNone" style="display:none" onclick="kursNone()">Курс</p>
 
-                <div id="group_body" style="display:none">
+                <div class="modal_body" id="kurs_body" style="display:none">
+
+                </div>
+                <p class="plus" id="group" onclick="group()">Группа</p>
+
+                <p class="plus" id="groupNone" style="display:none" onclick="groupNone()">Группа</p>
+
+                <div class="modal_body" id="group_body" style="display:none">
 
                 </div>
 
@@ -54,19 +72,65 @@
 
 
 
-            <div class="modal-footer">
 
-            </div>
         </div>
 
     </div>
 
 
 </div>
+<div class="limiter">
+    <div class="container-login100" style="background-image: url('/images/bg-01.jpg');">
+        <div id="index" class="wrap-login100">
+            <form class="login100-form validate-form">
+					<span class="login100-form-logo">
+						<img width="90" height="90" src="images/icons/icon.png">
+					</span>
 
-<table id="list_group">
-    <tr><th>Институт/Факультет</th><th>Курс</th><th>Группа</th><th>Направление подготовки</th><th>Уровень обучения</th></tr>
-    <tr><td value = "hgfdsdfghjk"></td></tr>
-</table>
+                <span id="login_title" class="login100-form-title p-b-34 p-t-27">
+                    <a id="user" class="txt1" th:text="${name} +' '+ ${surname}">
+
+</a><a onclick="delete_cookie('login_key')"><img id="exit" width="30" height="30" src="images/icons/exit.png">
+        </a>
+					</span>
+
+
+                <div class="container-login100-form-btn">
+                    <button type="button" class="login100-form-btn" th:href="${auth_url}">Добавить Google календарь</button>
+                    <button type="button"  id="myBtn" class="login100-form-btn"  >Добавить групу</button>
+                </div>
+                <div class="container-login100-form-btn">
+                </div>
+
+
+                <table id="list_group">
+                    <tr><th>Институт/Факультет</th><th>Курс</th><th>Группа</th><th>Направление подготовки</th><th>Уровень обучения</th></tr>
+
+                </table>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+<!--===============================================================================================-->
+<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+<script src="vendor/bootstrap/js/popper.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+<script src="vendor/daterangepicker/moment.min.js"></script>
+<script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+<script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+<script src="js/main.js"></script>
+
+
 </body>
 </html>
