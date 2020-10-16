@@ -17,6 +17,42 @@ class TmpNumberWeak{
 
 }
 
+class ScheduleList {
+    String TitleSubject, TypeLesson, DateLesson, Korpus,
+            NumberRoom, special, title, Family, Name, SecondName,
+            link, pass, zoom_link, zoom_password;
+    int id_cell, idGruop, NumberSubGruop, kurs, NumberLesson, DayWeek, employee_id;
+
+    public String getTitleSubject() {
+        return this.TitleSubject;
+    }
+
+    public String getTypeLesson() {
+        return this.TypeLesson;
+    }
+
+    public int getNumberLesson() {
+        return this.NumberLesson;
+    }
+
+    public int getDayWeek() {
+        return this.DayWeek;
+    }
+
+    public String getDateLesson() {
+        return this.DateLesson;
+    }
+
+    public String getKorpus() {
+        return this.Korpus;
+    }
+
+    public String getNumberRoom() {
+        return this.NumberRoom;
+    }
+
+}
+
 public class ScheduleConnectionStudent {
     HTTPConnection http = new HTTPConnection();
 
@@ -48,7 +84,7 @@ public class ScheduleConnectionStudent {
         return listItemsDes;
     }
 
-    public List<ScheduleList> getShaduleList(Object groupId, long timeMill) throws Exception {
+    public List<ScheduleList> getShaduleList(int groupId, long timeMill) throws Exception {
         NumberWeak tmpNumberWeak = new NumberWeak(0);
 
         String json = http.sendGet("http://oreluniver.ru/schedule//"+groupId+"///"+tmpNumberWeak.numberWeakMills()+"/printschedule");
@@ -66,7 +102,6 @@ public class ScheduleConnectionStudent {
                 break;
             }
             String strJSON = a.toString();
-            //System.out.println(strJSON);
             ScheduleList tmp = new Gson().fromJson(strJSON, ScheduleList.class);
             sch.add(tmp);
             i++;

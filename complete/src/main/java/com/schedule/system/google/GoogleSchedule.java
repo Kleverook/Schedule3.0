@@ -3,31 +3,7 @@ package com.schedule.system.google;
 public class GoogleSchedule {
 
     int  id_group, id_corpus, number_lesson;
-    String  title_subject, type_lesson, date_lesson,special,number_room,adress, t_start, t_stop;
-
-    public void setAdress(String adress) {
-        this.adress = adress;
-    }
-
-    public String getAdress() {
-        return adress;
-    }
-
-    public String getT_start() {
-        return t_start;
-    }
-
-    public String getT_stop() {
-        return t_stop;
-    }
-
-    public void setT_start(String t_start) {
-        this.t_start = t_start;
-    }
-
-    public void setT_stop(String t_stop) {
-        this.t_stop = t_stop;
-    }
+    String  title_subject, type_lesson, date_lesson,special,number_room;
 
     public void setDate_lesson(String date_lesson) {
         this.date_lesson = date_lesson;
