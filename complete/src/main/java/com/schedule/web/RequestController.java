@@ -71,6 +71,7 @@ public class RequestController {
         RequestApi json = new Gson().fromJson(request, RequestApi.class);
 
         System.out.println(json.api_method);
+        System.out.println(json.idgruop);
 
         if (json.api_method.equals("check_user")) {
             System.out.println(json.login);
@@ -174,6 +175,14 @@ public class RequestController {
             List<GroupList> groupLists = dataBase.getGroupList(user.getId());
             System.out.println(groupLists);
             return gson.toJson(groupLists);
+        }
+        else if (json.api_method.equals("delete_group")){
+            DatabaseConnection dataBase = new DatabaseConnection();
+            dataBase.connectionDB();
+
+            dataBase.deleteGroup(json.idgruop);
+            System.out.println(json.idgruop);
+            return gson.toJson(new StateLogin(true));
         }
         else {
             return gson.toJson(new StateLogin());
