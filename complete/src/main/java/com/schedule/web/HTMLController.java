@@ -79,21 +79,14 @@ public class HTMLController {
         System.out.println(id);
         System.out.println(code);
         CalendarAPI calendarAPI = new CalendarAPI("http://127.0.0.1:8080/google_auth?id=" + id);
-        calendarAPI.createService(code);
-        String token = calendarAPI.getAccessToken();
+        calendarAPI.createServiceFromCode(code);
+        String token = calendarAPI.getAccessObjectJson();
 
         System.out.println(token);
         DatabaseConnection dataBase = new DatabaseConnection();
         dataBase.connectionDB();
 
         dataBase.setGoogleCalendarKey(login_key, token);
-//        calendarAPI.createEvent(
-//                "Разработка платформенных и кросплатформенных киберфизических систем",
-//                "Наугорское ш., 29, Орёл, Орловская обл., 302020",
-//                "Кибернетические и киберфизические системы (лаб)\\nКорпус 11, аудитория 227\\nВетров А.С. http://oreluniver.ru/employee/7251\\n(создано при промощи приложения)",
-//                new DateTime("2020-10-14T15:30:00-00:00"),
-//                new DateTime("2020-10-14T17:10:00-00:00")
-//        );
         return "redirect:/";
     }
 
