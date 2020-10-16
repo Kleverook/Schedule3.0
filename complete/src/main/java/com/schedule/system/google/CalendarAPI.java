@@ -244,8 +244,8 @@ public class CalendarAPI {
 
     public static void main(String... args) throws IOException, GeneralSecurityException {
         CalendarAPI test = new CalendarAPI("/system/credentials.json", "http://127.0.0.1:8000");
-//        System.out.println(test.getAuthUrl());
-//
+        System.out.println(test.getAuthUrl());
+
 //        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 //        System.out.println("code");
 //        String code = in.readLine();
@@ -271,12 +271,12 @@ public class CalendarAPI {
         test.printEvents(events);
         test.deleteEvents(events);
 
-//        test.createEvent(
-//                "Разработка платформенных и кросплатформенных киберфизических систем",
-//                "Наугорское ш., 29, Орёл, Орловская обл., 302020",
-//                "asdfghjk (CalendarAPI)",
-//                new DateTime("2020-10-14T15:30:00-00:00"),
-//                new DateTime("2020-10-14T17:10:00-00:00")
-//        );
+        test.createEvent(
+                "Разработка платформенных и кросплатформенных киберфизических систем",
+                "Наугорское ш., 29, Орёл, Орловская обл., 302020",
+                "asdfghjk (CalendarAPI)",
+                new DateTime("2020-10-14T15:30:00-00:00"),
+                new DateTime("2020-10-14T17:10:00-00:00")
+        );
     }
 }
