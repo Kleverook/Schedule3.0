@@ -114,8 +114,40 @@ window.onload = function () {
 
         return p;
     }
+    function createRemowe(className, value, id) {
+        var p = document.createElement('input')
+        p.type = 'button'
+        p.className = className
+        p.id = id
+        p.value = value
+        p.onclick = function () {
+            delete_group(id)
+            show_group()
 
+        }
 
+        return p;
+    }
+
+    delete_group = function (id) {
+
+        console.log(id)
+        let xmlhttp = getXmlHttp()
+        xmlhttp.open('POST', '/api', true)
+        xmlhttp.setRequestHeader('Content-Type', 'application/json')
+
+        xmlhttp.send(JSON.stringify({
+            "idgruop": id,
+            "api_method": "delete_group"
+        }))
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4) {
+                if (xmlhttp.status == 200) {
+                    let answer = JSON.parse(xmlhttp.responseText)
+                }
+            }
+        }
+    }
     return_group = function (id) {
 
         let xmlhttp = getXmlHttp()
@@ -218,6 +250,7 @@ window.onload = function () {
                     let answer = JSON.parse(xmlhttp.responseText)
                     if (answer) {
                         console.log(answer)
+                        console.log(answer[0]["idgruop"])
                         for (var i = 0; i < answer.length; i++) {
                             let tr = document.createElement('tr')
 
@@ -227,6 +260,7 @@ window.onload = function () {
                             tr.appendChild(createTD('group_out')).appendChild(createP('group_P', answer[i]["title"]));
                             tr.appendChild(createTD('group_out')).appendChild(createP('group_P', answer[i]["Codedirection"]));
                             tr.appendChild(createTD('group_out')).appendChild(createP('group_P', answer[i]["levelEducation"]));
+                            tr.appendChild(createTD('group_out')).appendChild(createRemowe('close', 'X', answer[i]["idgruop"]));
 
                         }
                     }
@@ -237,15 +271,12 @@ window.onload = function () {
 
     var modal = document.getElementById('myModal');
     var btn = document.getElementById("myBtn");
-    var span = document.getElementsByClassName("close")[0];
     show_group()
     btn.onclick = function () {
         get_division()
         modal.style.display = "block";
     }
-    span.onclick = function () {
-        modal.style.display = "none";
-    }
+
     window.onclick = function (event) {
         if (event.target == modal) {
             modal.style.display = "none";

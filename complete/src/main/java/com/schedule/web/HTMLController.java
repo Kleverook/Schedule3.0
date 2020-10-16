@@ -82,6 +82,7 @@ public class HTMLController {
         calendarAPI.createService(code);
         String token = calendarAPI.getAccessToken();
 
+        System.out.println(token);
         DatabaseConnection dataBase = new DatabaseConnection();
         dataBase.connectionDB();
 

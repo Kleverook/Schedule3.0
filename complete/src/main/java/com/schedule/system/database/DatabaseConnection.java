@@ -118,7 +118,7 @@ System.out.println("sql");
 
         stmt = c.createStatement();
         ResultSet rs = stmt.executeQuery(
-                "select s.course, s.title, s.code, s.level_education, d.short_title " +
+                "select s.course, s.title, s.code, s.level_education, d.short_title, a.id_group " +
                 "from list_person_group as a, list_group as s, list_division as d " +
                 "where s.id = a.id_group and d.id = s.id_division and a.id_person = "+id +
                 " order by a.id");
@@ -126,6 +126,7 @@ System.out.println("sql");
         while (rs.next()) {
             GroupList group = new GroupList();
             group.setCourse(rs.getInt("course"));
+            group.setIdgruop(rs.getInt("id_group"));
             group.setTitle(rs.getString("title"));
             group.setCodedirection(rs.getString("code"));
             group.setLevelEducation(rs.getString("level_education"));
@@ -212,6 +213,18 @@ System.out.println("sql");
         if (j != -1) {
             return personList.get(j);
         } else return null;
+    }
+    public void deleteGroup(int id) throws SQLException {
+        System.out.println(id);
+        stmt = c.createStatement();
+        sql = "DELETE from list_person_group where id_group = "+id+";";
+        stmt.executeUpdate(sql);
+        c.commit();
+        stmt.close();
+        System.out.println("-- Operation DELETE done successfully");
+
+
+        c.close();
     }
 //    public
     //-------------- CREATE TABLE ---------------

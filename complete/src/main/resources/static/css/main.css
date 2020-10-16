@@ -399,7 +399,7 @@ iframe {
 }
 
 .input-checkbox100:checked + .label-checkbox100::before {
-  color: #555555;
+  color: #211d1d;
 }
 
 
@@ -419,8 +419,8 @@ iframe {
 .login100-form-btn {
   font-family: CenturyGothic-Bold;
   font-size: 16px;
-  color: #161616;
-  line-height: 1.2;
+  color: #211d1d;
+  line-height: 3;
 text-align: center;
   /*display: -webkit-box;*/
   /*display: -webkit-flex;*/
@@ -450,7 +450,7 @@ text-align: center;
 
 .login100-form-btn::before {
   content: "";
-  color: #555555;
+  color: #211d1d;
   display: block;
   position: absolute;
   z-index: -1;
@@ -561,11 +561,14 @@ text-align: center;
 }
 
 a,#myBtn{
-  color: #555555;;
+  color: #211d1d;;
 }
 a,#myBtn:hover{
   color: white;
 }
-h1{
+h1, a{
+  text-align: center;
+}
+#title_modal{
   text-align: center;
 }
