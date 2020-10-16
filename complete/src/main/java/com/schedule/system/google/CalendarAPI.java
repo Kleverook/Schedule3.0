@@ -13,10 +13,12 @@ import com.google.api.services.calendar.CalendarRequestInitializer;
 import com.google.api.services.calendar.CalendarScopes;
 import com.google.api.services.calendar.model.*;
 import com.google.gson.Gson;
+import com.schedule.system.database.DatabaseConnection;
 import sun.reflect.generics.scope.Scope;
 
 import java.io.*;
 import java.security.GeneralSecurityException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -49,6 +51,7 @@ public class CalendarAPI {
     public AccessObject getAccessObject() {
         return accessObject;
     }
+
     public String getAccessObjectJson() {
         Gson gson = new Gson();
         return gson.toJson(accessObject);
@@ -60,6 +63,7 @@ public class CalendarAPI {
         accessObject.expiresInSeconds = expiresInSeconds;
         accessObject.expirationTimeMilliseconds = expirationTimeMilliseconds;
     }
+
     public void setAccessObjectJson(String json) {
         Gson gson = new Gson();
         AccessObject tempAccessObject = gson.fromJson(json, AccessObject.class);
@@ -72,6 +76,7 @@ public class CalendarAPI {
     public String getCalendarId() {
         return calendarId;
     }
+
     public void setCalendarId(String calendarId) {
         this.calendarId = calendarId;
     }
@@ -208,7 +213,7 @@ public class CalendarAPI {
                 .setSingleEvents(true)
                 .execute();
         List<Event> events_list = events.getItems();
-        if (! events_list.isEmpty()) {
+        if (!events_list.isEmpty()) {
             for (Event event : events_list) {
                 if (event.getDescription() != null) {
                     if (event.getDescription().endsWith("(" + APPLICATION_NAME + ")")) {
@@ -242,6 +247,63 @@ public class CalendarAPI {
         }
     }
 
+    public void spam() throws IOException, GeneralSecurityException, SQLException {
+        CalendarAPI test = new CalendarAPI("/system/credentials.json", "http://127.0.0.1:8000");
+
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        databaseConnection.connectionDB();
+        List<People> peoples = databaseConnection.getPeople();
+
+        for (int i=0; i<peoples.size(); i++) {
+            String accessObject = peoples.get(i).getGoogle_calendar_key();
+            test.setAccessObjectJson(accessObject);
+            test.createServiceFromAccessObject();
+            List<Event> events = test.getEvents(
+                    100,
+                    new DateTime("2020-10-12T00:30:00-00:00"),
+                    new DateTime("2020-10-18T15:30:00-00:00")
+            );
+            test.deleteEvents(events);
+            List<GoogleSchedule> googleSchedules = databaseConnection.getSchedule(peoples.get(i).getId_person());
+            for (int j=0;j<googleSchedules.size();j++){
+                test.createEvent(
+                    googleSchedules.get(j).getTitle_subject(),
+                    googleSchedules,
+                    "asdfghjk (CalendarAPI)",
+                    new DateTime("2020-10-14T15:30:00-00:00"),
+                    new DateTime("2020-10-14T17:10:00-00:00")
+            );
+
+
+            }
+            updateAccessObject();
+            databaseConnection.setGoogleCalendarKey(peoples.get(i).getLogin_key(),getAccessObjectJson());
+
+        }
+
+
+//        for (int i = 0; i<googleSchedules.size(); i ++){
+//            String accessObject = googleSchedules.get(i).getGoogle_calendar_key();
+//            test.setAccessObjectJson(accessObject);
+//            test.createServiceFromAccessObject();
+//
+//            List<Event> events = test.getEvents(
+//                    100,
+//                    new DateTime("2020-10-12T00:30:00-00:00"),
+//                    new DateTime("2020-10-18T15:30:00-00:00")
+//            );
+//            test.printEvents(events);
+//            test.deleteEvents(events);
+//
+//            test.createEvent(
+//                    "Разработка платформенных и кросплатформенных киберфизических систем",
+//                    "Наугорское ш., 29, Орёл, Орловская обл., 302020",
+//                    "asdfghjk (CalendarAPI)",
+//                    new DateTime("2020-10-14T15:30:00-00:00"),
+//                    new DateTime("2020-10-14T17:10:00-00:00")
+//            );
+    }
+
     public static void main(String... args) throws IOException, GeneralSecurityException {
         CalendarAPI test = new CalendarAPI("/system/credentials.json", "http://127.0.0.1:8000");
         System.out.println(test.getAuthUrl());
@@ -251,14 +313,14 @@ public class CalendarAPI {
 //        String code = in.readLine();
 //        test.createServiceFromCode(code);
 //        System.out.println(test.getAccessObjectJson());
-//        test.createEvent(
-//                "Разработка платформенных и кросплатформенных киберфизических систем",
-//                "Наугорское ш., 29, Орёл, Орловская обл., 302020",
-//                "Кибернетические и киберфизические системы (лаб)\\nКорпус 11, аудитория 227\\nВетров А.С. http://oreluniver.ru/employee/7251\\n(создано при промощи приложения)",
-//                new DateTime("2020-10-14T15:30:00-00:00"),
-//                new DateTime("2020-10-14T17:10:00-00:00")
-//        );
-//
+        test.createEvent(
+                "Разработка платформенных и кросплатформенных киберфизических систем",
+                "Наугорское ш., 29, Орёл, Орловская обл., 302020",
+                "Кибернетические и киберфизические системы (лаб)\\nКорпус 11, аудитория 227\\nВетров А.С. http://oreluniver.ru/employee/7251\\n(создано при промощи приложения)",
+                new DateTime("2020-10-14T15:30:00-00:00"),
+                new DateTime("2020-10-14T17:10:00-00:00")
+        );
+
         String accessObject = "{\"accessToken\":\"ya29.a0AfH6SMAsb8ya8RDk0frfBOtbofd8115fyYj8Mrmd4m-RYwvaqE0MHSUQByY_UpQZZCVrizkIv2oqx7Q2Qf1ELL1C5moyz0rud5aahydfLiTMbEAewhcX2xn75cLXHlycrlaMPwK08BDAEviSYX-yyD1O_0bOqfu6IbY\",\"refreshToken\":\"1//0cwtHsBVdhL0zCgYIARAAGAwSNwF-L9Irvra0zLls2YuEXnFPnbWPqDZ9Lj3wcbP1hgqUdtD24NDf08uM6m-H1_z2xb6fMYrj7h4\",\"expiresInSeconds\":3598,\"expirationTimeMilliseconds\":1602784451716}";
         test.setAccessObjectJson(accessObject);
         test.createServiceFromAccessObject();

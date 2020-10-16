@@ -22,12 +22,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b8959205-b303-4dcc-9433-c3d711db312c" name="Default Changelist" comment="google good2">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/490af80b-15dc-40fc-b75b-a5f56c5987ac.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/490af80b-15dc-40fc-b75b-a5f56c5987ac/storage_v2/_src_/database/postgres.edMnLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/490af80b-15dc-40fc-b75b-a5f56c5987ac/storage_v2/_src_/database/postgres.edMnLQ/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/490af80b-15dc-40fc-b75b-a5f56c5987ac/storage_v2/_src_/database/postgres.edMnLQ/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/490af80b-15dc-40fc-b75b-a5f56c5987ac/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" />
+    <list default="true" id="b8959205-b303-4dcc-9433-c3d711db312c" name="Default Changelist" comment="google good3">
+      <change afterPath="$PROJECT_DIR$/complete/src/main/java/com/schedule/system/google/GoogleSchedule.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/complete/src/main/java/com/schedule/system/google/People.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/complete/src/main/java/com/schedule/system/oreluniver/ScheduleList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/919457f2-3aef-4f9f-b250-4cc2b14f96c4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/919457f2-3aef-4f9f-b250-4cc2b14f96c4.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/919457f2-3aef-4f9f-b250-4cc2b14f96c4/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/919457f2-3aef-4f9f-b250-4cc2b14f96c4/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/919457f2-3aef-4f9f-b250-4cc2b14f96c4/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.zip" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/919457f2-3aef-4f9f-b250-4cc2b14f96c4/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.zip" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/complete/.gradle/6.5.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/complete/.gradle/6.5.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/complete/.gradle/6.5.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/complete/.gradle/6.5.1/executionHistory/executionHistory.lock" afterDir="false" />
@@ -37,11 +38,23 @@
       <change beforePath="$PROJECT_DIR$/complete/.gradle/6.5.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/complete/.gradle/6.5.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/complete/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/complete/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/complete/build/classes/java/main/com/schedule/system/database/DatabaseConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/complete/build/classes/java/main/com/schedule/system/database/DatabaseConnection.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/complete/build/classes/java/main/com/schedule/system/google/AccessObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/complete/build/classes/java/main/com/schedule/system/google/AccessObject.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/complete/build/classes/java/main/com/schedule/system/google/CalendarAPI.class" beforeDir="false" afterPath="$PROJECT_DIR$/complete/build/classes/java/main/com/schedule/system/google/CalendarAPI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/complete/build/resources/main/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/complete/build/resources/main/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/complete/build/classes/java/main/com/schedule/system/google/Updater.class" beforeDir="false" afterPath="$PROJECT_DIR$/complete/build/classes/java/main/com/schedule/system/google/Updater.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/complete/build/classes/java/main/com/schedule/system/oreluniver/ScheduleConnectionStudent$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/complete/build/classes/java/main/com/schedule/system/oreluniver/ScheduleConnectionStudent$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/complete/build/classes/java/main/com/schedule/system/oreluniver/ScheduleConnectionStudent$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/complete/build/classes/java/main/com/schedule/system/oreluniver/ScheduleConnectionStudent$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/complete/build/classes/java/main/com/schedule/system/oreluniver/ScheduleConnectionStudent$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/complete/build/classes/java/main/com/schedule/system/oreluniver/ScheduleConnectionStudent$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/complete/build/classes/java/main/com/schedule/system/oreluniver/ScheduleConnectionStudent$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/complete/build/classes/java/main/com/schedule/system/oreluniver/ScheduleConnectionStudent$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/complete/build/classes/java/main/com/schedule/system/oreluniver/ScheduleConnectionStudent$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/complete/build/classes/java/main/com/schedule/system/oreluniver/ScheduleConnectionStudent$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/complete/build/classes/java/main/com/schedule/system/oreluniver/ScheduleConnectionStudent.class" beforeDir="false" afterPath="$PROJECT_DIR$/complete/build/classes/java/main/com/schedule/system/oreluniver/ScheduleConnectionStudent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/complete/build/classes/java/main/com/schedule/system/oreluniver/ScheduleList.class" beforeDir="false" afterPath="$PROJECT_DIR$/complete/build/classes/java/main/com/schedule/system/oreluniver/ScheduleList.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/complete/build/classes/java/main/com/schedule/web/HTMLController.class" beforeDir="false" afterPath="$PROJECT_DIR$/complete/build/classes/java/main/com/schedule/web/HTMLController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/complete/build/tmp/compileJava/source-classes-mapping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/complete/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/complete/src/main/java/com/schedule/system/database/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/complete/src/main/java/com/schedule/system/database/DatabaseConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/complete/src/main/java/com/schedule/system/google/CalendarAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/complete/src/main/java/com/schedule/system/google/CalendarAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/complete/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/complete/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/complete/src/main/java/com/schedule/system/google/Updater.java" beforeDir="false" afterPath="$PROJECT_DIR$/complete/src/main/java/com/schedule/system/google/Updater.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/complete/src/main/java/com/schedule/system/oreluniver/ScheduleConnectionStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/complete/src/main/java/com/schedule/system/oreluniver/ScheduleConnectionStudent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/complete/src/main/java/com/schedule/web/HTMLController.java" beforeDir="false" afterPath="$PROJECT_DIR$/complete/src/main/java/com/schedule/web/HTMLController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,9 +133,8 @@
     <property name="show.run.dashboard.notification" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\pader\Desktop\test\Schedule\complete\src\main\resources\static\index" />
-      <recent name="C:\Users\pader\Desktop\test\Schedule\complete\src\main\resources\static" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.schedule.system.database" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Schedule3.0\complete\src\main\java\com\schedule\system\google" />
@@ -130,10 +142,27 @@
       <recent name="C:\test\complete\src\main" />
       <recent name="C:\test\complete\src\main\java" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\pader\Desktop\test\Schedule\complete\src\main\resources\static\index" />
+      <recent name="C:\Users\pader\Desktop\test\Schedule\complete\src\main\resources\static" />
+    </key>
   </component>
-  <component name="RunManager" selected="Application.CalendarAPI">
+  <component name="RunManager" selected="Application.Updater">
     <configuration name="CalendarAPI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.schedule.system.google.CalendarAPI" />
+      <module name="serving-web-content.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.schedule.system.google.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Updater" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.schedule.system.google.Updater" />
       <module name="serving-web-content.main" />
       <extension name="coverage">
         <pattern>
@@ -212,6 +241,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Updater" />
         <item itemvalue="Spring Boot.ServingWebContentApplication (2)" />
         <item itemvalue="Application.CalendarAPI" />
         <item itemvalue="Spring Boot.ServingWebContentApplication (1)" />
@@ -236,7 +266,7 @@
       <workItem from="1602679020623" duration="5578000" />
       <workItem from="1602709048226" duration="13146000" />
       <workItem from="1602771457138" duration="3609000" />
-      <workItem from="1602850741262" duration="834000" />
+      <workItem from="1602850741262" duration="25867000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1602523561594</created>
@@ -259,7 +289,14 @@
       <option name="project" value="LOCAL" />
       <updated>1602849070963</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="google good3">
+      <created>1602851594949</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1602851594949</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -281,25 +318,31 @@
     <MESSAGE value="init" />
     <MESSAGE value="google good" />
     <MESSAGE value="google good2" />
-    <option name="LAST_COMMIT_MESSAGE" value="google good2" />
+    <MESSAGE value="google good3" />
+    <option name="LAST_COMMIT_MESSAGE" value="google good3" />
   </component>
   <component name="WindowStateProjectService">
     <state x="520" y="236" key="#Notifications" timestamp="1602694527715">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="520" y="236" key="#Notifications/0.0.1536.824@0.0.1536.824" timestamp="1602694527715" />
-    <state x="552" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602602040085">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="552" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1602602040085" />
-    <state x="574" y="118" key="#com.intellij.ide.util.MemberChooser" timestamp="1602781172634">
+    <state x="442" y="141" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602874023019">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="118" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1602781172634" />
+    <state x="442" y="141" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1602874023019" />
+    <state x="552" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1602602040085" />
+    <state x="574" y="118" key="#com.intellij.ide.util.MemberChooser" timestamp="1602856973962">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="574" y="118" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1602856973962" />
     <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1602777641260">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1602777641260" />
+    <state x="499" y="159" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog" timestamp="1602856985217">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="499" y="159" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1536.824@0.0.1536.824" timestamp="1602856985216" />
     <state x="66" y="13" width="1228" height="687" key="DiffContextDialog" timestamp="1602694528115">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -309,45 +352,45 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="810" y="417" key="Github.ShareDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1602600421302" />
-    <state width="995" height="226" key="GridCell.Tab.0.bottom" timestamp="1602851305653">
+    <state width="1493" height="255" key="GridCell.Tab.0.bottom" timestamp="1602878600219">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="995" height="226" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1602851305653" />
+    <state width="1493" height="255" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1602878600219" />
     <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1602723634470" />
-    <state width="995" height="226" key="GridCell.Tab.0.center" timestamp="1602851305653">
+    <state width="1493" height="255" key="GridCell.Tab.0.center" timestamp="1602878600219">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="995" height="226" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1602851305653" />
+    <state width="1493" height="255" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1602878600219" />
     <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1602723634470" />
-    <state width="995" height="226" key="GridCell.Tab.0.left" timestamp="1602851305653">
+    <state width="1493" height="255" key="GridCell.Tab.0.left" timestamp="1602878600219">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="995" height="226" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1602851305653" />
+    <state width="1493" height="255" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1602878600219" />
     <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1602723634470" />
-    <state width="995" height="226" key="GridCell.Tab.0.right" timestamp="1602851305653">
+    <state width="1493" height="255" key="GridCell.Tab.0.right" timestamp="1602878600219">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="995" height="226" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1602851305653" />
+    <state width="1493" height="255" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1602878600219" />
     <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1602723634470" />
-    <state width="995" height="226" key="GridCell.Tab.1.bottom" timestamp="1602850954537">
+    <state width="1493" height="161" key="GridCell.Tab.1.bottom" timestamp="1602873582860">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="995" height="226" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1602850954537" />
+    <state width="1493" height="161" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1602873582860" />
     <state width="1877" height="282" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1602723634470" />
-    <state width="995" height="226" key="GridCell.Tab.1.center" timestamp="1602850954537">
+    <state width="1493" height="161" key="GridCell.Tab.1.center" timestamp="1602873582860">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="995" height="226" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1602850954537" />
+    <state width="1493" height="161" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1602873582860" />
     <state width="1877" height="282" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1602723634470" />
-    <state width="995" height="226" key="GridCell.Tab.1.left" timestamp="1602850954537">
+    <state width="1493" height="161" key="GridCell.Tab.1.left" timestamp="1602873582860">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="995" height="226" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1602850954537" />
+    <state width="1493" height="161" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1602873582860" />
     <state width="1877" height="282" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1602723634470" />
-    <state width="995" height="226" key="GridCell.Tab.1.right" timestamp="1602850954537">
+    <state width="1493" height="161" key="GridCell.Tab.1.right" timestamp="1602873582860">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="995" height="226" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1602850954537" />
+    <state width="1493" height="161" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1602873582860" />
     <state width="1877" height="282" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1602723634470" />
     <state x="407" y="173" key="MultipleFileMergeDialog" timestamp="1602849093941">
       <screen x="0" y="0" width="1536" height="824" />
@@ -361,11 +404,15 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="618" y="325" key="VCS.ChangelistChooser/0.0.1536.824@0.0.1536.824" timestamp="1602694397947" />
-    <state x="451" y="183" key="Vcs.Push.Dialog.v2" timestamp="1602696665811">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1602851602833">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1602523566840" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1602851602833" />
     <state x="451" y="183" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1602696665811" />
+    <state x="527" y="289" width="402" height="244" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1602866233535">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="527" y="289" width="402" height="244" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.1536.824@0.0.1536.824" timestamp="1602866233535" />
     <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1602849083501">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -374,14 +421,19 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="209" y="32" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1602520430609" />
-    <state x="493" y="190" key="run.anything.popup" timestamp="1602778096232">
+    <state x="469" y="169" key="refactoring.ChangeSignatureDialog" timestamp="1602879344628">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="493" y="190" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1602778096232" />
-    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1602720899364" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1602717170957">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="469" y="169" key="refactoring.ChangeSignatureDialog/0.0.1536.824@0.0.1536.824" timestamp="1602879344628" />
+    <state x="493" y="190" key="run.anything.popup" timestamp="1602877771700">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="493" y="190" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1602877771700" />
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1602720899364" />
+    <state x="498" y="178" width="672" height="538" key="search.everywhere.popup" timestamp="1602857059064">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="498" y="178" width="672" height="538" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1602857059064" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1602717170957" />
   </component>
   <component name="XDebuggerManager">
@@ -391,6 +443,11 @@
           <url>file://$PROJECT_DIR$/complete/src/main/java/schedule/web/ServingWebContentApplication.java</url>
           <line>9</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/complete/src/main/java/com/schedule/system/oreluniver/ScheduleConnectionStudent.java</url>
+          <line>62</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

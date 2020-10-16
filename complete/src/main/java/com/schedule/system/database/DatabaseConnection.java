@@ -1,7 +1,10 @@
 package com.schedule.system.database;
 
+import com.schedule.system.google.GoogleSchedule;
+import com.schedule.system.google.People;
 import com.schedule.system.oreluniver.DivisionList;
 import com.schedule.system.oreluniver.GroupList;
+import com.schedule.system.oreluniver.ScheduleList;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,7 +15,7 @@ public class DatabaseConnection {
     static final String DB_URL = "jdbc:postgresql://0.0.0.0:5432/postgres";
     static final String USER = "postgres";
     static final String PASS = "0000";
-    Connection c;
+    public Connection c;
     Statement stmt;
     String sql;
 
@@ -39,6 +42,98 @@ public class DatabaseConnection {
 
 //        sql = sql.substring(0, sql.length() - 2) + " ON CONFLICT (id) DO UPDATE SET title = EXCLUDED.title, SHORT_TITLE = EXCLUDED.SHORT_TITLE;";
         System.out.println(sql);
+        stmt.execute(sql);
+        c.commit();
+    }
+
+    public List<GoogleSchedule> getSchedule(int id) throws SQLException {
+        List<GoogleSchedule> googleSchedules = new ArrayList<>();
+
+        stmt = c.createStatement();
+        ResultSet rs = stmt.executeQuery(
+                "select a.id_group , s.title_subject, s.type_lesson, s.id_corpus, s.date_lesson, " +
+                        "s.number_lesson, s.special, s.number_room " +
+                        "from list_person_group as a, auth_person as p, list_schedule as s " +
+                        "where p.id = "+id+" );");
+
+        while (rs.next()) {
+            GoogleSchedule schedule = new GoogleSchedule();
+            schedule.setId_group(rs.getInt("id_group"));
+            schedule.setTitle_subject(rs.getString("title_subject"));
+            schedule.setType_lesson(rs.getString("type_lesson"));
+            schedule.setId_corpus(rs.getInt("id_corpus"));
+            schedule.setDate_lesson(rs.getString("date_lesson"));
+            schedule.setNumber_lesson(rs.getInt("number_lesson"));
+            schedule.setSpecial(rs.getString("special"));
+            schedule.setNumber_room(rs.getString("number_room"));
+            googleSchedules.add(schedule);
+        }
+        rs.close();
+        stmt.close();
+        c.commit();
+        return googleSchedules;
+    }
+    public List<People> getPeople() throws SQLException {
+        List<People> peoples= new ArrayList<>();
+
+        stmt = c.createStatement();
+        ResultSet rs = stmt.executeQuery
+                (" select id, google_calendar_key,login_key " +
+                        "from auth_person " +
+                        "where google_calendar_key is not null " +
+                        "  and id in (select id_person " +
+                        "             from list_person_group " +
+                        "             where update = false " +
+                        "             group by id_person); " );
+
+        while (rs.next()) {
+            People people = new People();
+            people.setId_person(rs.getInt("id"));
+            people.setGoogle_calendar_key(rs.getString("google_calendar_key"));
+            people.setLogin_key(rs.getString("login_key"));
+
+            peoples.add(people);
+
+        }
+        rs.close();
+        stmt.close();
+        c.commit();
+        return peoples;
+    }
+
+
+
+
+    public void setSchedule(List<ScheduleList> scheduleList) throws SQLException {
+        stmt = c.createStatement();
+        sql = "INSERT INTO list_schedule (id, number_sub_gruop, title_subject, type_lesson," +
+                " number_lesson, day_week, date_lesson, special, link, pass," +
+                " zoom_link, zoom_password, id_corpus, id_employee, id_group, number_room) VALUES ";
+        for (int i = 0; i < scheduleList.size(); i++) {
+            sql += String.format("(%s, %s, '%s', '%s', %s, %s,'%s','%s','%s','%s','%s', '%s', %s, %s, %s, '%s'),",
+                    scheduleList.get(i).getId_cell(), scheduleList.get(i).getNumberSubGruop(), scheduleList.get(i).getTitleSubject(),
+                    scheduleList.get(i).getTypeLesson(), scheduleList.get(i).getNumberLesson(), scheduleList.get(i).getDayWeek(),
+                    scheduleList.get(i).getDateLesson(), scheduleList.get(i).getSpecial(), scheduleList.get(i).getLink(),
+                    scheduleList.get(i).getPass(), scheduleList.get(i).getZoom_link(), scheduleList.get(i).getZoom_password(),
+                    scheduleList.get(i).getKorpus(), scheduleList.get(i).getEmployee_id(), scheduleList.get(i).getIdGruop(), scheduleList.get(i).getNumberRoom());
+        }
+        sql = sql.substring(0, sql.length() - 1) + " ON CONFLICT (id) DO UPDATE SET " +
+                "number_sub_gruop=EXCLUDED.number_sub_gruop, " +
+                "title_subject=EXCLUDED.title_subject, " +
+                "type_lesson=EXCLUDED.type_lesson, " +
+                "number_lesson=EXCLUDED.number_lesson, " +
+                "day_week=EXCLUDED.day_week, " +
+                "date_lesson=EXCLUDED.date_lesson, " +
+                "special=EXCLUDED.special, " +
+                "link=EXCLUDED.link, " +
+                "pass=EXCLUDED.pass, " +
+                "zoom_link=EXCLUDED.zoom_link, " +
+                "zoom_password=EXCLUDED.zoom_password, " +
+                "id_corpus=EXCLUDED.id_corpus, " +
+                "id_employee=EXCLUDED.id_employee, " +
+                "id_group=EXCLUDED.id_group;";
+////        sql+=sql.substring(0, sql.length() - 1)+";";
+        //System.out.println(sql);
         stmt.execute(sql);
         c.commit();
     }
@@ -74,7 +169,7 @@ public class DatabaseConnection {
         stmt = c.createStatement();
 
         sql = "SELECT count(id)" +
-                "FROM list_person_group where id_person ="+id_person+" and id_group = "+id_group+";";
+                "FROM list_person_group where id_person =" + id_person + " and id_group = " + id_group + ";";
         ResultSet rs = stmt.executeQuery(sql);
         int count = 0;
         while (rs.next()) {
@@ -83,12 +178,12 @@ public class DatabaseConnection {
         System.out.println(count);
 
         c.commit();
-        if (count==0) {
+        if (count == 0) {
 
             sql = "INSERT INTO list_person_group (id_person,id_group) VALUES ";
             sql += String.format("(%s, %s); ", id_person, id_group);
 //        sql = sql.substring(0, sql.length() - 2) + " ON CONFLICT (id_group) DO UPDATE SET id_person = EXCLUDED.id_person;";
-System.out.println("sql");
+            System.out.println("sql");
             stmt.execute(sql);
             c.commit();
         }
@@ -113,15 +208,32 @@ System.out.println("sql");
         return divisionLists;
     }
 
-    public List<GroupList> getGroupList( int id) throws SQLException {
+    public List<GroupList> getListPersonGroup() throws SQLException {
+        List listGroupId = new ArrayList<>();
+
+        stmt = c.createStatement();
+        ResultSet rs = stmt.executeQuery(
+                "select a.id_group from list_person_group as a group by id_group;");
+
+        while (rs.next()) {
+
+            listGroupId.add(rs.getInt("id_group"));
+        }
+        rs.close();
+        stmt.close();
+        c.commit();
+        return listGroupId;
+    }
+
+    public List<GroupList> getGroupList(int id) throws SQLException {
         List<GroupList> listGroup = new ArrayList<>();
 
         stmt = c.createStatement();
         ResultSet rs = stmt.executeQuery(
                 "select s.course, s.title, s.code, s.level_education, d.short_title " +
-                "from list_person_group as a, list_group as s, list_division as d " +
-                "where s.id = a.id_group and d.id = s.id_division and a.id_person = "+id +
-                " order by a.id");
+                        "from list_person_group as a, list_group as s, list_division as d " +
+                        "where s.id = a.id_group and d.id = s.id_division and a.id_person = " + id +
+                        " order by a.id");
 
         while (rs.next()) {
             GroupList group = new GroupList();
