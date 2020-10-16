@@ -1,25 +1,109 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns:form="http://www.w3.org/1999/xhtml">
 <head>
+    <title>Login</title>
     <meta charset="UTF-8">
-    <title>Регистрация</title>
-    <script src="scripts.js"></script>
-    <script src="register/scripts.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="css/util.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <!--===============================================================================================-->
 </head>
 <body>
-<h1>Регистрация</h1>
-<div>
 
-    <p><input type="text" id="login" onkeyup="check_login(this)" placeholder="Username"></p>
-    <p><input type="password" id="password" onkeyup="check_password(this)" placeholder="password"></p>
-    <p><input type="password" id="password_repeat" onkeyup="check_password_repeat(this)" placeholder="password"></p>
-    <p><input type="text" id="name" onkeyup="check_name(this)" placeholder="Имя"></p>
-    <p><input type="text" id="surname" onkeyup="check_surname(this)" placeholder="Фамилия"></p>
+<div class="limiter">
+    <div class="container-login100" style="background-image: url('/images/bg-01.jpg');">
+        <div class="wrap-login100">
+            <form class="login100-form validate-form">
+					<span class="login100-form-logo">
+						<img width="90" height="90" src="images/icons/icon.png">
+					</span>
 
-    <output id="error_box"></output>
-    <p><input type="button" id="next" onclick="check_user()"></p>
+                <span id="login_title" class="login100-form-title p-b-34 p-t-27">
+						Регистрация
+					</span>
+
+                <div class="wrap-input100 validate-input" data-validate="Введите имя пользователя">
+                    <input class="input100" type="text" id="login" name="username" onkeyup="check_login(this)"
+                           placeholder="Username">
+                    <span id="login1" style="color: #ffffff" class="focus-input100" data-placeholder="&#xf207;"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Введите пароль">
+                    <input class="input100" id="password" type="password" onkeyup="check_password(this)" name="pass"
+                           placeholder="Password">
+                    <span id="password1" style="color: #ffffff" class="focus-input100"
+                          data-placeholder="&#xf191;"></span>
+                </div>
+                <div class="wrap-input100 validate-input" data-validate="Введите пароль повторно">
+                    <input class="input100" id="password_repeat" type="password" name="username"
+                           onkeyup="check_password_repeat(this)" placeholder="password">
+                    <span id="password_repeat1" style="color: #ffffff" class="focus-input100"
+                          data-placeholder="&#xf191;"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Имя">
+                    <input class="input100" id="name" type="text" onkeyup="check_name(this)" name="pass"
+                           placeholder="Имя">
+                    <span id="name1" style="color: #ffffff" class="focus-input100" data-placeholder="&#xf207;"></span>
+                </div>
+                <div class="wrap-input100 validate-input" data-validate="Фамилия">
+                    <input class="input100" id="surname" type="text" onkeyup="check_surname(this)" name="pass"
+                           placeholder="Фамилия">
+                    <span id="surname1" style="color: #ffffff" class="focus-input100"
+                          data-placeholder="&#xf207;"></span>
+                </div>
+
+
+                <div class="container-login100-form-btn">
+                    <input type="button" id="next" class="login100-form-btn" value="Регистрация" onclick="check_user()">
+                </div>
+                <output id="error_box"></output>
+
+            </form>
+        </div>
+    </div>
 </div>
 
+
+<div id="dropDownSelect1"></div>
+
+<!--===============================================================================================-->
+<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+<script src="vendor/bootstrap/js/popper.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+<script src="vendor/daterangepicker/moment.min.js"></script>
+<script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+<script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+<script src="js/main.js"></script>
+<script src="scripts.js"></script>
+<script src="register/scripts.js"></script>
 
 </body>
 </html>

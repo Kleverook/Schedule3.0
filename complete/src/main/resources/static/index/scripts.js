@@ -52,9 +52,6 @@ window.onload = function () {
         var input = document.createElement('input')
         input.type = 'button'
         input.className = className
-        input.style.width = '100px'
-        input.style.height = '50px'
-        input.style.backgroundColor = 'blue'
         input.value = value
         input.id = id
         input.onclick = function () {
@@ -69,9 +66,6 @@ window.onload = function () {
         var input = document.createElement('input')
         input.type = 'button'
         input.className = className
-        input.style.width = '100px'
-        input.style.height = '50px'
-        input.style.backgroundColor = 'blue'
         input.value = value
         input.id = id
         input.onclick = function () {
@@ -86,9 +80,6 @@ window.onload = function () {
         var input = document.createElement('input')
         input.type = 'button'
         input.className = className
-        input.style.width = '100px'
-        input.style.height = '50px'
-        input.style.backgroundColor = 'blue'
         input.value = value
         input.id = id
         input.onclick = function () {
@@ -159,7 +150,7 @@ window.onload = function () {
                     let answer = JSON.parse(xmlhttp.responseText)
                     if (answer) {
                         for (var i = 0; i < answer.length; i++) {
-                            modal_body.appendChild(createKurs('kurs', answer[i]['kurs'], id));
+                            modal_body.appendChild(createKurs('login100-form-btn', answer[i]['kurs'], id));
                         }
                     }
                 }
@@ -180,7 +171,7 @@ window.onload = function () {
                     let answer = JSON.parse(xmlhttp.responseText)
                     if (answer) {
                         for (var i = 0; i < answer.length; i++) {
-                            modal_body.appendChild(createGroup('group', answer[i]['title'], answer[i]['idgruop']));
+                            modal_body.appendChild(createGroup('login100-form-btn', answer[i]['title'], answer[i]['idgruop']));
                         }
                     }
                 }
@@ -204,7 +195,7 @@ window.onload = function () {
                     if (answer) {
 
                         for (var i = 0; i < answer.length; i++) {
-                            modal_body.appendChild(createDiv('division', answer[i]['shortTitle'], answer[i]['idDivision']));
+                            modal_body.appendChild(createDiv('login100-form-btn', answer[i]['shortTitle'], answer[i]['idDivision']));
                         }
                     }
                 }

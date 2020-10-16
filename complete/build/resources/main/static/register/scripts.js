@@ -56,64 +56,69 @@ window.onload = function () {
     }
     check_login = function () {
         let login = document.getElementById('login')
+        let login1 = document.getElementById('login1')
 
 
         if (onlyLettersAndDigits(login) & notNull(login) & countSimbol(login)) {
-            login.style.background = "#29FF0E"
+            login1.style.color = "#b0fda6"
             return true
         } else {
-            login.style.background = "#ff0000"
+            login1.style.color = "#F58F8F"
             return false
         }
 
     }
     check_password = function () {
         let password = document.getElementById('password')
+        let password1 = document.getElementById('password1')
         // console.log("======pass===============")
         // console.log(onlyLettersAndDigits(password))
         // console.log(notNull(password))
         // console.log(countSimbol(password))
         // console.log(includeDigits(password))
         if (onlyLettersAndDigits(password) & notNull(password) & countSimbol(password) & includeDigits(password)) {
-            password.style.background = "#29FF0E"
+            password1.style.color = "#B0FDA6"
             return true
         } else {
-            password.style.background = "#ff0000"
+            password1.style.color = "#f58f8f"
             return false
         }
     }
     check_password_repeat = function () {
         let password = document.getElementById('password')
         let password_repeat = document.getElementById('password_repeat')
+        let password_repeat1 = document.getElementById('password_repeat1')
 
         if (password.value == password_repeat.value) {
-            password_repeat.style.background = "#29FF0E"
+            password_repeat1.style.color = "#B0FDA6"
             return true
         } else {
-            password_repeat.style.background = "#ff0000"
+            password_repeat1.style.color = "#F58F8F"
             return false
         }
 
     }
     check_name = function () {
         let name = document.getElementById('name')
+        let name1 = document.getElementById('name1')
 
         if (checkSimbol(name)) {
-            name.style.background = "#29FF0E"
+            name1.style.color = "#B0FDA6"
             return true
         } else {
-            name.style.background = "#ff0000"
+            name1.style.color = "#F58F8F"
             return false
         }
     }
     check_surname = function () {
         let surname = document.getElementById('surname')
+        let surname1 = document.getElementById('surname1')
 
         if (checkSimbol(surname)) {
-            surname.style.background = "#29FF0E"
+            surname1.style.color = "#B0FDA6"
             return true
         } else {
-            surname.style.background = "#ff0000"
+            surname1.style.color = "#F58F8F"
             return false
         }
     }
@@ -123,13 +128,18 @@ window.onload = function () {
         let error = document.getElementById('error_box')
         let login = document.getElementById('login')
         // console.log(login.value)
+        console.log(check_login())
+        console.log(check_password())
+        console.log(check_password_repeat())
+        console.log(check_name())
+        console.log(check_surname())
         if (check_login() & check_password() & check_password_repeat() & check_name() & check_surname()) {
 
             console.log("OK2")
 
            select_database()
         } else {
-            error.style.visibility = 'hidden'
+            error.style.visibility = 'visible'
 
         }
 
@@ -138,6 +148,7 @@ window.onload = function () {
 
 select_database = function () {
     let login = document.getElementById('login')
+    let login1 = document.getElementById('login1')
     let password = document.getElementById('password')
     let name = document.getElementById('name')
     let surname = document.getElementById('surname')
@@ -164,8 +175,9 @@ select_database = function () {
                     window.location = "/"
 
                 } else {
-                    login.style.background = "#ff0000"
+                    login1.style.color = "#F58F8F"
                     error.value = answer["loginKey"]
+                    console.log(answer["loginKey"])
                 }
             }
         }
