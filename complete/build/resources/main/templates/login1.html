@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:form="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <script src="scripts.js"></script>
+    <script src="login/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+<body>
+<div class="child">
+<h1>Вход</h1>
+<div>
+<!--    <form:input type="text" path="username" placeholder="Username"-->
+<!--                autofocus="true"></form:input>-->
+<!--    <form:errors path="username"></form:errors>-->
+<!--    ${usernameError}-->
+    <p><input type="text" id="login" onkeyup="check_login(this)" placeholder="Username"></p>
+    <p><input type="password" id="password" placeholder="password"></p>
+    <p><input type="button" id="next" value="Входlogin.html" onclick="check_user()"></p>
+    <p id="error_box" style="visibility: hidden;">Логин или пароль не верен.</p>
+</div>
+
+<a href="/register">Регистрация</a>
+</div>
+</body>
+</html>
