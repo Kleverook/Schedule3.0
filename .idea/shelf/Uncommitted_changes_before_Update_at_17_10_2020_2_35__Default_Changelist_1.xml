@@ -1,0 +1,19 @@
+<changelist name="Uncommitted_changes_before_Update_at_17_10_2020_2_35_[Default_Changelist]1" date="1602891376173" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_10_2020_2_35_[Default_Changelist]1/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 17.10.2020 2:35 [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="complete/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
+    <option name="AFTER_PATH" value="complete/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_10_2020_2_35_[Default_Changelist]1/buildOutputCleanup.lock" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="complete/.gradle/6.5.1/fileHashes/fileHashes.lock" />
+    <option name="AFTER_PATH" value="complete/.gradle/6.5.1/fileHashes/fileHashes.lock" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_10_2020_2_35_[Default_Changelist]1/fileHashes.lock" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="complete/.gradle/6.5.1/executionHistory/executionHistory.lock" />
+    <option name="AFTER_PATH" value="complete/.gradle/6.5.1/executionHistory/executionHistory.lock" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_10_2020_2_35_[Default_Changelist]1/executionHistory.lock" />
+  </binary>
+</changelist>
